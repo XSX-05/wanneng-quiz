@@ -1,0 +1,12 @@
+{
+  "appId": "com.quiz.wanneng",
+  "appName": "万能刷题通",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
