@@ -1,1 +1,21 @@
-ewogICJuYW1lIjogInF1aXotYXBwIiwKICAidmVyc2lvbiI6ICIxLjAuMjUiLAogICJkZXNjcmlwdGlvbiI6ICIiLAogICJtYWluIjogImluZGV4LmpzIiwKICAic2NyaXB0cyI6IHsKICAgICJ0ZXN0IjogImVjaG8gXCJFcnJvcjogbm8gdGVzdCBzcGVjaWZpZWRcIiAmJiBleGl0IDEiCiAgfSwKICAia2V5d29yZHMiOiBbXSwKICAiYXV0aG9yIjogIiIsCiAgImxpY2Vuc2UiOiAiSVNDIiwKICAidHlwZSI6ICJjb21tb25qcyIsCiAgImRlcGVuZGVuY2llcyI6IHsKICAgICJAY2FwYWNpdG9yL2FuZHJvaWQiOiAiXjguNC4wIiwKICAgICJAY2FwYWNpdG9yL2FwcCI6ICJeOC4xLjAiLAogICAgIkBjYXBhY2l0b3IvY2xpIjogIl44LjQuMCIsCiAgICAiQGNhcGFjaXRvci9jb3JlIjogIl44LjQuMCIsCiAgICAiQGNhcGFjaXRvci9maWxlc3lzdGVtIjogIl44LjEuMiIsCiAgICAiQGNhcGFjaXRvci9zaGFyZSI6ICJeOC4wLjEiCiAgfQp9Cg==
+{
+  "name": "quiz-app",
+  "version": "1.0.25",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.4.0",
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/cli": "^8.4.0",
+    "@capacitor/core": "^8.4.0",
+    "@capacitor/filesystem": "^8.1.2",
+    "@capacitor/share": "^8.0.1"
+  }
+}
