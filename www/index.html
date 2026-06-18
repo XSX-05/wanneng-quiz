@@ -10,7 +10,7 @@
 <meta http-equiv="Expires" content="0">
 <title>万能刷题通</title>
 <style>
-:root{--primary:#DC2626;--primary-light:#F87171;--primary-dark:#991B1B;--success:#10B981;--warning:#F59E0B;--danger:#EF4444;--bg:#F8FAFC;--card:#FFFFFF;--text:#1E293B;--text-secondary:#64748B;--border:#E2E8F0;--shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 8px 24px rgba(0,0,0,0.12);--radius:16px;--radius-sm:10px}
+:root{--primary:#DC2626;--primary-light:#F87171;--primary-dark:#991B1B;--success:#10B981;--warning:#F59E0B;--danger:#EF4444;--bg:#F8FAFC;--card:#FFFFFF;--text:#1E293B;--text-secondary:#64748B;--border:#E2E8F0;--shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 8px 24px rgba(0,0,0,0.12);--radius:16px;--radius-sm:10px;--card-bg:rgba(255,255,255,0.85);--card-opacity:0.85}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .app{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
@@ -51,7 +51,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-light),var(--primary));border-radius:5px;transition:width 0.5s}
 .page{display:none;min-height:100vh}
 .page.active{display:block}
-.question-card{background:var(--card);border-radius:var(--radius);margin:16px 20px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.question-card{background:var(--card-bg);border-radius:var(--radius);margin:16px 20px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);transition:border-color 0.2s,box-shadow 0.2s}
 .q-type{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:10px}
 .q-type-single{background:#FEE2E2;color:#DC2626}
 .q-type-multi{background:#D1FAE5;color:#059669}
@@ -62,25 +62,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .q-text{font-size:15px;line-height:1.7;font-weight:500}
 .q-hint{font-size:12px;color:var(--primary);margin-top:8px;opacity:0.8}
 .options-list{padding:0 20px 20px}
-.option-item{background:var(--card);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;cursor:pointer;transition:all 0.2s}
+.option-item{background:var(--card-bg);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;cursor:pointer;transition:border-color 0.2s,background-color 0.2s,transform 0.2s,box-shadow 0.2s}
 .option-item:active{transform:scale(0.98)}
-.option-item.selected{border-color:#3B82F6;background:#EFF6FF}
-.option-item.correct{border-color:var(--success);background:#ECFDF5}
-.option-item.wrong{border-color:var(--danger);background:#FEF2F2}
-.option-item.show-correct{border-color:var(--success);background:#ECFDF5}
+.option-item.selected{border-color:var(--primary);background:rgba(254,242,242,var(--card-opacity))}
+.option-item.correct{border-color:var(--success);background:rgba(209,250,229,var(--card-opacity))}
+.option-item.wrong{border-color:var(--danger);background:rgba(254,242,242,var(--card-opacity))}
+.option-item.show-correct{border-color:var(--success);background:rgba(209,250,229,var(--card-opacity))}
 .option-item.disabled{pointer-events:none;opacity:0.85}
 .option-letter{width:32px;height:32px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--text-secondary);margin-right:12px;flex-shrink:0;transition:all 0.2s}
-.option-item.selected .option-letter{background:#3B82F6;color:white}
-.option-item.show-correct .option-letter{background:var(--success);color:white}
+.option-item.selected .option-letter{background:var(--primary);color:white}
+.option-item.show-correct .option-letter{background:#F1F5F9;color:var(--text-secondary)}
 .option-item.correct .option-letter{background:var(--success);color:white}
 .option-item.wrong .option-letter{background:var(--danger);color:white}
+.option-item.single-correct .option-letter{background:var(--success);color:white}
+.option-item.multi-sel{border-color:#3B82F6;background:rgba(239,246,255,var(--card-opacity))}
+.option-item.multi-sel .option-letter{background:#3B82F6;color:white}
+.option-item.exam-sel{border-color:#3B82F6;background:rgba(239,246,255,var(--card-opacity))}
+.option-item.exam-sel .option-letter{background:#3B82F6;color:white}
 .option-text{font-size:14px;line-height:1.5}
 .judge-options{display:flex;gap:14px;padding:0 20px 20px}
-.judge-btn{flex:1;padding:20px;border-radius:var(--radius);border:2px solid var(--border);background:var(--card);font-size:16px;font-weight:600;cursor:pointer;transition:all 0.2s;text-align:center}
+.judge-btn{flex:1;padding:20px;border-radius:var(--radius);border:2px solid var(--border);background:var(--card-bg);font-size:16px;font-weight:600;cursor:pointer;transition:border-color 0.2s,background-color 0.2s,transform 0.2s;text-align:center}
 .judge-btn:active{transform:scale(0.97)}
-.judge-btn.selected{border-color:var(--primary);background:#FEF2F2}
-.judge-btn.correct{border-color:var(--success);background:#ECFDF5}
-.judge-btn.wrong{border-color:var(--danger);background:#FEF2F2}
+.judge-btn.selected{border-color:var(--primary);background:rgba(254,242,242,var(--card-opacity))}
+.judge-btn.correct{border-color:var(--success);background:rgba(236,253,245,var(--card-opacity))}
+.judge-btn.wrong{border-color:var(--danger);background:rgba(254,242,242,var(--card-opacity))}
 .judge-btn.disabled{pointer-events:none;opacity:0.85}
 /* Fill-in-the-blank styles */
 .fill-input-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:0 4px}
@@ -145,22 +150,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
 .btn-success{background:var(--success);color:white}
 .answer-box{margin:0 20px 16px;padding:16px;border-radius:var(--radius-sm);font-size:14px;line-height:1.6}
-.answer-correct{background:#ECFDF5;border-left:4px solid var(--success)}
-.answer-wrong{background:#FEF2F2;border-left:4px solid var(--danger)}
-.answer-partial{background:#FFFBEB;border-left:4px solid var(--warning)}
+.answer-correct{background:rgba(236,253,245,var(--card-opacity));border-left:4px solid var(--success)}
+.answer-wrong{background:rgba(254,242,242,var(--card-opacity));border-left:4px solid var(--danger)}
+.answer-partial{background:rgba(255,251,235,var(--card-opacity));border-left:4px solid var(--warning)}
 .answer-box .label{font-weight:700;margin-bottom:4px}
 .answer-box .correct-ans{color:var(--success);font-weight:600}
 .expl-toggle{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(0,0,0,0.1);cursor:pointer;user-select:none;font-size:13px;color:var(--text-secondary)}
 .expl-toggle:active{opacity:0.7}
 .expl-status{font-size:12px;color:var(--primary);font-weight:600}
-.expl-content{display:none;margin-top:8px;padding:10px 12px;background:rgba(0,0,0,0.04);border-radius:8px;font-size:13px;line-height:1.7;color:var(--text)}
+.expl-content{display:none;margin-top:8px;padding:10px 12px;background:rgba(0,0,0,0.034);border-radius:8px;font-size:13px;line-height:1.7;color:var(--text)}
 .expl-content.open{display:block}
 .exam-info{background:var(--card);border-radius:var(--radius);margin:16px 20px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
 .exam-info h3{font-size:18px;margin-bottom:12px}
 .exam-rules{font-size:13px;color:var(--text-secondary);line-height:1.8}
 .exam-rules .rule{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .exam-rules .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);flex-shrink:0}
-.exam-timer{position:sticky;top:0;background:var(--primary);color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10;font-size:14px;font-weight:600}
+.exam-timer{position:fixed;top:0;left:0;right:0;max-width:480px;margin:0 auto;background:var(--primary);color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10;font-size:14px;font-weight:600}
 .exam-timer .nav-btn-sm{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .exam-submit-btn{padding:5px 14px;border-radius:16px;border:1.5px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.15);color:white;font-size:12px;font-weight:600;cursor:pointer;margin-left:6px;white-space:nowrap;transition:all 0.15s}
 .exam-submit-btn:active{background:rgba(255,255,255,0.3)}
@@ -203,13 +208,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .tab-icon{font-size:22px}
 .tab-label{font-size:10px;color:var(--text-secondary);margin-top:2px}
 .tab-item.active .tab-label{color:var(--primary);font-weight:600}
-.streak-bar{display:flex;align-items:center;gap:8px;padding:8px 20px;margin-top:-4px}
+.streak-bar{display:flex;align-items:center;gap:8px;padding:8px 20px;margin-top:-4px;background:transparent}
 .streak-flame{font-size:20px}
 .streak-text{font-size:13px;color:var(--text-secondary)}
 .streak-count{font-weight:700;color:var(--warning)}
 ::-webkit-scrollbar{width:0;height:0}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeIn 0.3s ease}
+@keyframes slideIn{from{transform:translateY(10px)}to{transform:translateY(0)}}
+.fade-in{animation:slideIn 0.25s ease}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .pulse{animation:pulse 0.3s ease}
 .confirm-bar{padding:12px 20px;position:sticky;bottom:0;background:var(--bg)}
@@ -227,17 +232,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .nav-type-tab.active{border-color:var(--primary);background:#FEF2F2;color:var(--primary)}
 .nav-dots{display:flex;flex-wrap:wrap;gap:8px;padding:16px 20px 24px;overflow-y:auto}
 .nav-dot{width:42px;height:42px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
-.nav-dot.current{border-color:#FBBF24;background:#FBBF24;color:white}
-.nav-dot.current.done-correct{border-color:#10B981;background:#10B981;color:white}
-.nav-dot.current.done-wrong{border-color:#EF4444;background:#EF4444;color:white}
+.nav-dot.current{border-color:#FBBF24;background:#FBBF24;color:white;box-shadow:0 0 0 3px rgba(251,191,36,0.4)}
+.nav-dot.current.done-correct{border-color:#10B981;background:#10B981;color:white;box-shadow:0 0 0 3px rgba(16,185,129,0.4)}
+.nav-dot.current.done-wrong{border-color:#EF4444;background:#EF4444;color:white;box-shadow:0 0 0 3px rgba(239,68,68,0.4)}
 .nav-dot.done,.nav-dot.answered{border-color:var(--primary-light);background:#FEF2F2;color:var(--primary)}
-#page-exam[data-exam-mode="true"] .nav-dot.done,#page-exam[data-exam-mode="true"] .nav-dot.answered{border-color:#FBBF24;background:#FEF9C3;color:#B45309}
+.nav-overlay.exam-mode .nav-dot.done,.nav-overlay.exam-mode .nav-dot.answered{border-color:#F59E0B;background:#FDE68A;color:#92400E}
 #page-exam[data-exam-mode="true"] .nav-dot.current{border-color:#FBBF24;background:#FBBF24;color:white}
-#page-exam[data-exam-mode="true"] .nav-dot.done.current,#page-exam[data-exam-mode="true"] .nav-dot.answered.current{border-color:#FBBF24;background:#FBBF24;color:white}
+.nav-overlay.exam-mode .nav-dot.done.current,.nav-overlay.exam-mode .nav-dot.answered.current{border-color:#FBBF24;background:#FBBF24;color:white;box-shadow:0 0 0 3px rgba(251,191,36,0.4)}
+.nav-dot.exam-answered{border-color:#F59E0B!important;background:#FDE68A!important;color:#92400E!important}
+.nav-dot.exam-answered.current{border-color:#FBBF24!important;background:#FBBF24!important;color:white!important;box-shadow:0 0 0 3px rgba(251,191,36,0.4)!important}
 .nav-dot.done-correct{border-color:var(--success);background:#ECFDF5;color:var(--success)}
 .nav-dot.done-wrong{border-color:var(--danger);background:#FEF2F2;color:var(--danger)}
-
-/* Type filter chips for wrong/random */
+.nav-dot.nav-has-type{position:relative}
+.nav-dot .nav-type-dot{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;line-height:1;box-shadow:0 0 0 1.5px var(--card)}
+.nav-type-dot-single{background:#DC2626}
+.nav-type-dot-multi{background:#059669}
+.nav-type-dot-judge{background:#D97706}
+.nav-type-dot-fill{background:#7C3AED}
+.nav-type-dot-subjective{background:#2563EB}
 .type-filter-row{display:flex;gap:8px;padding:12px 20px;flex-wrap:wrap}
 .type-chip{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.2s}
 .type-chip.active{border-color:var(--primary);background:#FEF2F2;color:var(--primary)}
@@ -398,6 +410,119 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .merge-rename-box input:focus{border-color:var(--primary)}
 .merge-rename-box .mr-actions{display:flex;gap:12px}
 .merge-rename-box .mr-actions .btn{flex:1;padding:12px}
+
+/* ===== Dark Mode ===== */
+html.dark-mode{--bg:#0C1322;--card:#182234;--text:#E2E8F0;--text-secondary:#94A3B8;--border:#2C3A4E;--shadow:0 2px 8px rgba(0,0,0,0.35);--shadow-lg:0 8px 24px rgba(0,0,0,0.45);--card-bg:rgba(24,34,52,0.85);--card-opacity:0.85}
+html.dark-mode body{background:#0C1322}
+html.dark-mode .header{background:linear-gradient(135deg,#7F1D1D,#450A0A)!important}
+html.dark-mode .stat-card,html.dark-mode .menu-card,html.dark-mode .progress-card,html.dark-mode .question-card,html.dark-mode .wrong-item,html.dark-mode .result-card,html.dark-mode .practice-result-card{background:var(--card-bg);border-color:#2C3A4E}
+html.dark-mode .tab-bar{background:#182234;border-top-color:#2C3A4E}
+html.dark-mode .option-item{background:var(--card-bg);border-color:#2C3A4E}
+html.dark-mode .option-item.selected{border-color:var(--primary);background:rgba(59,28,28,var(--card-opacity))}
+html.dark-mode .option-item.correct{border-color:#09B834;background:rgba(6,95,70,var(--card-opacity))}
+html.dark-mode .option-item.wrong{border-color:#E51B1B;background:rgba(127,29,29,var(--card-opacity))}
+html.dark-mode .option-item.show-correct{border-color:#09B834;background:rgba(6,95,70,var(--card-opacity))}
+html.dark-mode .option-item.multi-sel{border-color:#3B82F6;background:rgba(30,58,95,var(--card-opacity))}
+html.dark-mode .option-item:active{background:#2C3A4E}
+html.dark-mode .option-letter{background:#2C3A4E;color:#94A3B8}
+html.dark-mode .option-item.selected .option-letter{background:var(--primary);color:white}
+html.dark-mode .option-item.show-correct .option-letter{background:#2C3A4E;color:#94A3B8}
+html.dark-mode .option-item.correct .option-letter{background:#09B834;color:white}
+html.dark-mode .option-item.wrong .option-letter{background:#E51B1B;color:white}
+html.dark-mode .option-item.single-correct .option-letter{background:var(--success);color:white}
+html.dark-mode .option-item.multi-sel .option-letter{background:#3B82F6;color:white}
+html.dark-mode .option-item.exam-sel{border-color:#3B82F6;background:rgba(30,58,95,var(--card-opacity))}
+html.dark-mode .option-item.exam-sel .option-letter{background:#3B82F6;color:white}
+html.dark-mode .judge-btn{background:var(--card-bg);border-color:#2C3A4E;color:#E2E8F0}
+html.dark-mode .judge-btn.selected{border-color:var(--primary);background:rgba(59,28,28,var(--card-opacity))}
+html.dark-mode .judge-btn.correct{border-color:#09B834;background:rgba(6,95,70,var(--card-opacity))}
+html.dark-mode .judge-btn.wrong{border-color:#E51B1B;background:rgba(127,29,29,var(--card-opacity))}
+html.dark-mode .fill-input-row input,html.dark-mode .fill-inline-input{background:#182234;border-color:#2C3A4E;color:#E2E8F0}
+html.dark-mode .fill-input-row input.correct-input,html.dark-mode .fill-inline-input.correct-input{border-color:var(--success);background:#064E3B}
+html.dark-mode .fill-input-row input.wrong-input,html.dark-mode .fill-inline-input.wrong-input{border-color:var(--danger);background:#450A0A}
+html.dark-mode .subjective-area textarea{background:#182234;border-color:#2C3A4E;color:#E2E8F0}
+html.dark-mode .subjective-ref{background:#182234;border-color:#2C3A4E;color:#E2E8F0}
+html.dark-mode .answer-correct{background:rgba(6,78,59,var(--card-opacity))}
+html.dark-mode .answer-wrong{background:rgba(69,10,10,var(--card-opacity))}
+html.dark-mode .answer-partial{background:rgba(69,26,3,var(--card-opacity))}
+html.dark-mode .expl-content{background:rgba(44,58,78,var(--card-opacity));color:#E2E8F0}
+html.dark-mode .search-box input{background:#182234;color:#E2E8F0}
+html.dark-mode .search-results{background:#182234}
+html.dark-mode .search-result-item{border-bottom-color:#2C3A4E}
+html.dark-mode .search-result-item:active{background:#2C3A4E}
+html.dark-mode .import-card{background:#182234;border-color:#2C3A4E}
+html.dark-mode .bank-item{background:#182234;border-color:#2C3A4E}
+html.dark-mode .modal-sheet{background:#182234}
+html.dark-mode .modal-cancel{background:#2C3A4E;color:#E2E8F0}
+html.dark-mode .modal-option{border-color:#2C3A4E}
+html.dark-mode .modal-option:active{background:#2C3A4E}
+html.dark-mode .merge-rename-box{background:#182234}
+html.dark-mode .merge-rename-box input{background:#0F172A;border-color:#2C3A4E;color:#E2E8F0}
+html.dark-mode .confirm-box{background:#182234}
+html.dark-mode .btn-outline{background:transparent;border-color:#2C3A4E;color:#E2E8F0}
+html.dark-mode .nav-panel{background:#182234}
+html.dark-mode .q-dot{border-color:#2C3A4E;color:#94A3B8}
+html.dark-mode .wrong-badge.need2{background:#450A0A;color:#FCA5A5}
+html.dark-mode .wrong-badge.need1{background:#451A03;color:#FDE68A}
+html.dark-mode .empty-state{color:#94A3B8}
+html.dark-mode .custom-summary{background:linear-gradient(135deg,#451A03,#78350F)}
+html.dark-mode .custom-summary-title{color:#FDE68A}
+html.dark-mode .custom-summary-row{color:#FDE68A}
+html.dark-mode .exam-timer{background:#7F1D1D}
+html.dark-mode .settings-toggle{background:#475569}
+html.dark-mode .settings-toggle.active{background:#22C55E}
+html.dark-mode .custom-toggle{background:#475569}
+html.dark-mode .custom-toggle.active{background:var(--primary)}
+html.dark-mode .custom-type-card{background:#182234;border-color:#2C3A4E}
+html.dark-mode .revealed-answer-text{color:#CBD5E1}
+html.dark-mode .practice-nav-panel{background:#182234}
+html.dark-mode .practice-nav-grid .nav-dot{border-color:#2C3A4E;color:#94A3B8}
+html.dark-mode .practice-result-card{background:#182234;border-color:#2C3A4E}
+html.dark-mode .result-detail{background:#2C3A4E}
+html.dark-mode .btn-confirm{background:var(--primary);color:white}
+html.dark-mode .btn-confirm:disabled{background:#475569}
+html.dark-mode .streak-bar{background:transparent}
+
+/* ===== Practice Background ===== */
+.settings-section-title{font-size:13px;font-weight:600;color:var(--text-secondary);padding:16px 0 10px;text-transform:uppercase;letter-spacing:0.5px}
+.bg-preview-box{margin:8px 0 12px;border-radius:var(--radius-sm);background:var(--border);padding:8px;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+.bg-preview-img{max-width:100%;max-height:160px;border-radius:8px;object-fit:cover;border:1px solid var(--border)}
+.bg-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:#E2E8F0;outline:none}
+.bg-slider::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:#E2E8F0}
+.bg-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--primary);cursor:pointer;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.2);margin-top:-8px}
+.bg-clear-btn{display:inline-block;padding:8px 16px;border-radius:8px;border:1px solid var(--danger);background:#FEF2F2;color:var(--danger);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
+.bg-clear-btn:active{background:#FEE2E2}
+
+.practice-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none}
+.page:not(.active) .practice-bg{display:none}
+#page-practice,#page-exam{position:relative}
+#practice-content,#exam-content,.header,.streak-bar,.practice-nav-panel{position:relative;z-index:1}
+
+/* Dark mode settings section titles */
+html.dark-mode .settings-section-title{color:#94A3B8}
+html.dark-mode .bg-preview-box{background:#2C3A4E;border-color:#475569}
+html.dark-mode .bg-preview-img{border-color:#475569}
+html.dark-mode .bg-slider::-webkit-slider-runnable-track{background:#475569;height:6px;border-radius:3px}
+html.dark-mode .bg-slider::-webkit-slider-thumb{border-color:white;background:#EF4444}
+html.dark-mode .bg-clear-btn{background:#450A0A;color:#FCA5A5;border-color:#7F1D1D}
+
+/* Full-screen edit page */
+#edit-modal.modal-overlay.edit-fullscreen{background:var(--bg);display:none;flex-direction:column;align-items:stretch;overflow:hidden}
+#edit-modal.modal-overlay.edit-fullscreen.show{display:flex}
+#edit-modal .edit-page-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+#edit-modal .edit-page-header .edit-back-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:white;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+#edit-modal .edit-page-header .edit-page-title{font-size:18px;font-weight:700;flex:1}
+#edit-modal .edit-page-header .edit-save-btn{padding:6px 18px;border-radius:16px;border:1.5px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.2);color:white;font-size:13px;font-weight:600;cursor:pointer}
+#edit-modal .edit-page-body{flex:1;overflow-y:auto;padding-bottom:24px}
+#edit-modal .edit-section-label{font-size:13px;font-weight:700;color:var(--text-secondary);padding:0 20px;margin:16px 0 8px;text-transform:uppercase;letter-spacing:0.5px}
+.edit-option-display{background:var(--card);border:2px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin:0 20px 8px;display:flex;align-items:center}
+.edit-option-display.correct-option{border-color:var(--success);background:#ECFDF5}
+.edit-option-display .edit-opt-letter{width:28px;height:28px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-secondary);margin-right:10px;flex-shrink:0}
+.edit-option-display.correct-option .edit-opt-letter{background:var(--success);color:white}
+html.dark-mode #edit-modal .edit-page-header{background:linear-gradient(135deg,#7F1D1D,#450A0A)}
+html.dark-mode .edit-option-display{background:#1e293b;border-color:#334155}
+html.dark-mode .edit-option-display.correct-option{background:#064E3B;border-color:#10B981}
+html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#94A3B8}
 </style>
 </head>
 <body>
@@ -498,7 +623,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
   <div class="batch-bar" id="wrong-batch-bar" style="display:none">
     <div class="batch-info" id="wrong-batch-info">已选 0 题</div>
     <button class="batch-btn" onclick="toggleSelectAllWrong()">全选</button>
-    <button class="batch-btn danger" onclick="batchRemoveWrong()">移除选中</button>
+    <button class="batch-btn" style="background:#3B82F6;color:white" onclick="shareWrongSelected()">分享</button>
+    <button class="batch-btn danger" onclick="batchRemoveWrong()">移除</button>
   </div>
   <div id="wrong-list"></div>
   <div style="height:20px"></div>
@@ -506,8 +632,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 
 <!-- FAVORITES -->
 <div class="page" id="page-favorites">
-  <div class="header"><button class="back-btn" onclick="goBack()">←</button><div class="header-title" style="padding-left:36px">收藏夹</div><div class="header-sub" id="fav-sub">收藏的重点题目</div></div>
+  <div class="header"><button class="back-btn" onclick="goBack()">←</button><div class="header-title" style="padding-left:36px">收藏夹</div><div class="header-sub" id="fav-sub">收藏的重点题目</div><button class="wrong-manage-btn" id="fav-manage-btn" onclick="toggleFavManage()">管理</button></div>
   <div class="type-filter-row" id="fav-filter"></div>
+  <div class="batch-bar" id="fav-batch-bar" style="display:none">
+    <div class="batch-info" id="fav-batch-info">已选 0 题</div>
+    <button class="batch-btn" onclick="toggleSelectAllFav()">全选</button>
+    <button class="batch-btn" style="background:#3B82F6;color:white" onclick="shareFavSelected()">分享</button>
+    <button class="batch-btn danger" onclick="batchRemoveFav()">移除</button>
+  </div>
   <div id="fav-list"></div>
   <div style="height:20px"></div>
 </div>
@@ -596,8 +728,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 <div class="page" id="page-exam-intro">
   <div class="header"><button class="back-btn" onclick="goBack()">←</button><div class="header-title" style="padding-left:36px">模拟考试</div><div class="header-sub">随机组卷 · 全真模拟</div></div>
   <div class="exam-info">
-    <h3>📋 考试规则</h3>
-    <div class="exam-rules">
+    <h3>📋 默认考试规则 <span style="font-size:12px;font-weight:normal;text-decoration:underline;color:var(--primary);cursor:pointer;margin-left:8px" onclick="showEditDefaultExam()">修改</span></h3>
+    <div class="exam-rules" id="exam-rules-content">
       <div class="rule"><span class="dot"></span>单选题 40 道（第1-40题），每道 0.5 分</div>
       <div class="rule"><span class="dot"></span>多选题 15 道（第41-55题），每道 1 分</div>
       <div class="rule"><span class="dot" style="background:var(--warning)"></span>&nbsp;&nbsp;多选选不全得 0.5 分，错选 0 分</div>
@@ -672,8 +804,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
     <button class="fav-btn-sm" id="exam-fav-btn" onclick="toggleCurrentFav()">☆</button>
     <button class="exam-submit-btn" onclick="finishExam()">交卷</button>
   </div>
-  <div class="q-dots" id="exam-dots"></div>
-  <div id="exam-content"></div>
+  <div id="exam-content" style="padding-top:52px"></div>
 </div>
 
 <!-- RESULT -->
@@ -711,9 +842,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
     <div class="menu-card" style="margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default">
       <div style="display:flex;align-items:center;gap:12px">
         <div class="icon" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin:0">🔀</div>
-        <div><div class="title" style="font-size:15px;font-weight:600">打乱选项顺序</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">做选择题时随机打乱A/B/C/D选项顺序</div></div>
+        <div><div class="title" style="font-size:15px;font-weight:600">打乱选项顺序</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">做选择题时随机打乱A/B/C/D选项顺序。<span style="color:var(--primary);font-weight:700;text-decoration:underline">注意：解析不会因为选项顺序被打乱而更改，所以更改答案或解析时记得关闭哦</span></div></div>
       </div>
       <div class="settings-toggle" id="shuffle-options-toggle" onclick="toggleShuffleOptions()"></div>
+    </div>
+
+    <div class="settings-section-title">外观</div>
+
+    <div class="menu-card" style="margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="icon" style="background:linear-gradient(135deg,#312E81,#1E1B4B);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin:0">🌙</div>
+        <div><div class="title" style="font-size:15px;font-weight:600">夜间模式</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">开启后使用深色界面，适合夜间使用</div></div>
+      </div>
+      <div class="settings-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()"></div>
+    </div>
+
+    <div class="settings-section-title">刷题背景</div>
+
+    <div class="menu-card" style="margin-bottom:14px;padding:16px 18px;cursor:default">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="icon" style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin:0">🖼️</div>
+        <div><div class="title" style="font-size:15px;font-weight:600">自定义刷题背景</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">上传竖版图片作为刷题页面背景</div></div>
+      </div>
+
+      <div class="bg-preview-box" id="bg-preview-box">
+        <span id="bg-preview-text" style="font-size:13px;color:var(--text-secondary)">当前：默认背景</span>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button class="btn btn-outline" style="flex:1;font-size:13px;padding:10px" onclick="triggerBgUpload()">📷 上传竖版背景图</button>
+      </div>
+      <div style="text-align:center;font-size:11px;color:var(--text-secondary);margin-bottom:8px">推荐比例：竖屏9:16~9:21，建议手机屏幕比例基本一致</div>
+      <input type="file" id="bg-file-input" accept="image/*" style="display:none" onchange="handleBgFileSelect(event)">
+
+      <div style="margin-top:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px;font-weight:600">背景透明度</span>
+          <span id="bg-opacity-value" style="font-size:13px;color:var(--text-secondary)">30%</span>
+        </div>
+        <input type="range" class="bg-slider" id="bg-opacity-slider" min="0" max="100" value="30" oninput="onBgOpacityChange(this.value)">
+      </div>
+
+      <div style="text-align:center;margin-top:10px">
+        <span class="bg-clear-btn" id="bg-clear-btn" onclick="clearPracticeBg()" style="display:none">清除自定义背景</span>
+      </div>
+
+      <div style="margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px;font-weight:600">题目UI块的透明度</span>
+          <span id="ui-opacity-value" style="font-size:13px;color:var(--text-secondary)">15%</span>
+        </div>
+        <input type="range" class="bg-slider" id="ui-opacity-slider" min="0" max="100" value="15" oninput="onUiOpacityChange(this.value)">
+        <div style="font-size:11px;color:var(--text-secondary);margin-top:4px">调节题目卡片、选项、答案解析底纹的透明度，值越大越透明</div>
+      </div>
     </div>
   </div>
   <div style="height:90px"></div>
@@ -722,6 +903,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
     <div class="tab-item" onclick="switchTab('category')"><div class="tab-icon">📂</div><div class="tab-label">分类</div></div>
     <div class="tab-item" onclick="switchTab('stats')"><div class="tab-icon">📊</div><div class="tab-label">统计</div></div>
     <div class="tab-item active" onclick="switchTab('settings')"><div class="tab-icon">⚙️</div><div class="tab-label">设置</div></div>
+  </div>
+</div>
+
+<!-- EDIT DEFAULT EXAM -->
+<div class="page" id="page-edit-default-exam">
+  <div class="header"><button class="back-btn" onclick="goBack()">←</button><div class="header-title" style="padding-left:36px">修改默认设置</div><div class="header-sub">调整模拟考试默认配置</div></div>
+  <div class="custom-form" id="default-exam-form"></div>
+  <div class="bottom-actions" style="padding:16px 20px">
+    <button class="btn btn-primary" style="width:100%" onclick="saveDefaultExamSettings()">保存设置</button>
   </div>
 </div>
 
@@ -790,6 +980,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
     </div>
     <button class="modal-cancel" onclick="closeShareModal()">关闭</button>
   </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-overlay" id="export-modal" onclick="if(event.target===this)closeExportModal()">
+  <div class="modal-sheet">
+    <div class="modal-title" id="export-modal-title">导出格式</div>
+    <div class="modal-option" onclick="confirmExportSelection('json')">
+      <div class="mo-icon mo-json">📄</div>
+      <div class="mo-info"><div class="mo-title">导出为 JSON 文件</div><div class="mo-desc">通用格式，方便程序处理</div></div>
+    </div>
+    <div class="modal-option" onclick="confirmExportSelection('txt')">
+      <div class="mo-icon mo-txt">📝</div>
+      <div class="mo-info"><div class="mo-title">导出为 TXT 文件</div><div class="mo-desc">纯文本格式，方便阅读编辑</div></div>
+    </div>
+    <button class="modal-cancel" onclick="closeExportModal()">关闭</button>
+  </div>
+</div>
+
+<!-- EDIT ANSWER FULL-SCREEN PAGE -->
+<div class="modal-overlay edit-fullscreen" id="edit-modal">
+  <div class="edit-page-header">
+    <button class="edit-back-btn" onclick="closeEditModal()">←</button>
+    <span class="edit-page-title">编辑答案和解析</span>
+    <button class="edit-save-btn" onclick="saveEdit()">保存</button>
+  </div>
+  <div class="edit-page-body" id="edit-page-body"></div>
 </div>
 
 <!-- MERGE RENAME DIALOG -->
@@ -970,6 +1186,17 @@ function loadBankQuestions(bankId) {
   localStorage.setItem('lastBank', bankId);
   if (bankId === BUILTIN_BANK_ID) {
     QUESTIONS = BUILTIN_QUESTIONS.map(function(q){return Object.assign({}, q)});
+    // Apply saved answer/explanation patches
+    try {
+      var patches = JSON.parse(localStorage.getItem('quizBuiltinPatches') || '{}');
+      Object.keys(patches).forEach(function(idx) {
+        var i = parseInt(idx);
+        if (QUESTIONS[i] && patches[idx]) {
+          if (patches[idx].answer !== undefined) QUESTIONS[i].answer = patches[idx].answer;
+          if (patches[idx].explanation !== undefined) QUESTIONS[i].explanation = patches[idx].explanation;
+        }
+      });
+    } catch(e) {}
   } else {
     var banks = getBanks();
     var bank = banks.find(function(b){return b.id===bankId});
@@ -1279,6 +1506,360 @@ function downloadFallback(name, ext, content, mime) {
   document.body.appendChild(a);
   a.click();
   setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+}
+
+// ============ SELECTED QUESTIONS EXPORT/SHARE ============
+function questionsToJSON(questions) {
+  var output = questions.map(function(q){
+    var obj = {type: q.type, question: q.question};
+    if (q.type !== 'judge' && q.type !== 'fill' && q.type !== 'subjective' && q.options) obj.options = q.options;
+    obj.answer = q.answer;
+    if (q.explanation) obj.explanation = q.explanation;
+    return obj;
+  });
+  return JSON.stringify({questions: output}, null, 2);
+}
+
+function questionsToTXT(questions) {
+  var lines = [];
+  questions.forEach(function(q, i){
+    var tag = q.type === 'single' ? '[单选]' : (q.type === 'multi' ? '[多选]' : (q.type === 'judge' ? '[判断]' : (q.type === 'subjective' ? '[主观]' : '[填空]')));
+    lines.push(tag);
+    lines.push('题目：' + q.question);
+    if (q.type !== 'judge' && q.type !== 'fill' && q.type !== 'subjective' && q.options) {
+      lines.push('选项：');
+      q.options.forEach(function(opt, j){
+        lines.push(String.fromCharCode(65+j) + '. ' + opt);
+      });
+    }
+    if (q.type === 'judge') {
+      lines.push('答案：' + (q.answer === true || q.answer === 'true' ? '正确' : '错误'));
+    } else if (q.type === 'fill') {
+      var fillAns = Array.isArray(q.answer) ? q.answer.join(', ') : q.answer;
+      lines.push('答案：' + fillAns);
+    } else if (q.type === 'subjective') {
+      lines.push('答案：' + (q.answer || '无'));
+    } else {
+      lines.push('答案：' + q.answer);
+    }
+    if (q.explanation) {
+      lines.push('解析：' + q.explanation);
+    }
+    if (i < questions.length - 1) lines.push('---');
+  });
+  return lines.join('\n');
+}
+
+function shareSelectedQuestions(questions, format, title) {
+  if (!questions || !questions.length) return;
+  var content, ext, mime;
+  if (format === 'json') {
+    content = questionsToJSON(questions);
+    ext = '.json';
+    mime = 'application/json';
+  } else {
+    content = questionsToTXT(questions);
+    ext = '.txt';
+    mime = 'text/plain';
+  }
+  var fileName = (title || '题目导出') + ext;
+
+  var hasCapShare = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share;
+  var hasCapFs = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem;
+
+  if (hasCapShare && hasCapFs) {
+    var Share = window.Capacitor.Plugins.Share;
+    var Filesystem = window.Capacitor.Plugins.Filesystem;
+    var base64 = btoa(unescape(encodeURIComponent(content)));
+    Filesystem.writeFile({
+      path: fileName,
+      data: base64,
+      directory: 'CACHE',
+      recursive: true
+    }).then(function(result) {
+      return Share.share({
+        title: '分享题目',
+        text: '题目文件：' + fileName,
+        url: result.uri,
+        dialogTitle: '分享题目'
+      });
+    }).then(function() {
+      Filesystem.deleteFile({path: fileName, directory: 'CACHE'}).catch(function(){});
+      showReward('✅', '已分享', '题目已成功分享');
+    }).catch(function(err) {
+      Filesystem.deleteFile({path: fileName, directory: 'CACHE'}).catch(function(){});
+      if (err && err.message && err.message.indexOf('cancel') === -1) {
+        fallbackShareQuestions(content, fileName, mime);
+      }
+    });
+  } else {
+    fallbackShareQuestions(content, fileName, mime);
+  }
+}
+
+function fallbackShareQuestions(content, fileName, mime) {
+  var blob = new Blob([content], {type: mime + ';charset=utf-8'});
+  var file = new File([blob], fileName, {type: mime});
+  if (navigator.canShare && navigator.canShare({files: [file]})) {
+    navigator.share({files: [file], title: '题目导出', text: fileName}).then(function(){
+      showReward('✅', '已导出', '题目已成功导出');
+    }).catch(function(err){
+      if (err.name !== 'AbortError') downloadShareFile(fileName, content, mime);
+    });
+  } else {
+    downloadShareFile(fileName, content, mime);
+    showReward('✅', '文件已生成', '已下载 ' + fileName);
+  }
+}
+
+function downloadShareFile(fileName, content, mime) {
+  var blob = new Blob([content], {type: mime + ';charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+}
+
+var _exportSource = null;
+
+function shareWrongSelected() {
+  if (!_wrongSelected.length) return;
+  showExportModal('错题导出', 'wrong');
+}
+
+function shareFavSelected() {
+  if (!_favSelected.length) return;
+  showExportModal('收藏导出', 'fav');
+}
+
+function showExportModal(title, source) {
+  _exportSource = source;
+  document.getElementById('export-modal-title').textContent = title;
+  document.getElementById('export-modal').classList.add('show');
+}
+
+function closeExportModal() {
+  document.getElementById('export-modal').classList.remove('show');
+  _exportSource = null;
+}
+
+function confirmExportSelection(format) {
+  var questions, title;
+  if (_exportSource === 'wrong') {
+    questions = _wrongSelected.map(function(oi) { return QUESTIONS[oi]; });
+    title = '错题导出';
+  } else if (_exportSource === 'fav') {
+    questions = _favSelected.map(function(oi) { return QUESTIONS[oi]; });
+    title = '收藏导出';
+  }
+  closeExportModal();
+  if (questions && questions.length) {
+    shareSelectedQuestions(questions, format, title);
+  }
+}
+
+// ============ EDIT ANSWER/EXPLANATION ============
+function showEditModal() {
+  var p = state.practice;
+  var q = p.qs[p.current];
+  if (!q) return;
+  var body = document.getElementById('edit-page-body');
+  var html = '';
+
+  // Question info card
+  html += '<div class="question-card" style="margin:16px 20px">';
+  html += '<span class="q-type q-type-' + q.type + '">' + TYPE_NAME[q.type] + '</span>';
+  html += '<div class="q-number">' + getQTypeNum(q) + ' · 第' + (p.current + 1) + '题/共' + p.qs.length + '题</div>';
+  html += '<div class="q-text" style="margin-top:8px">' + q.question + '</div>';
+  if (q.type === 'single' || q.type === 'multi') {
+    var letters = ['A', 'B', 'C', 'D'];
+    var correctLetters = q.type === 'multi' ? q.answer.split('') : [q.answer];
+    html += '<div style="margin-top:12px">';
+    q.options.forEach(function(opt, i) {
+      var isCorrect = correctLetters.indexOf(letters[i]) >= 0;
+      html += '<div class="edit-option-display' + (isCorrect ? ' correct-option' : '') + '">';
+      html += '<div class="edit-opt-letter">' + letters[i] + '</div>';
+      html += '<div class="option-text">' + opt + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  } else if (q.type === 'judge') {
+    html += '<div style="margin-top:12px;display:flex;gap:10px">';
+    html += '<div class="edit-option-display' + (q.answer === 'true' ? ' correct-option' : '') + '" style="flex:1;justify-content:center">✓ 正确</div>';
+    html += '<div class="edit-option-display' + (q.answer === 'false' ? ' correct-option' : '') + '" style="flex:1;justify-content:center">✗ 错误</div>';
+    html += '</div>';
+  } else if (q.type === 'fill') {
+    var ansArr = Array.isArray(q.answer) ? q.answer : [q.answer];
+    html += '<div style="margin-top:12px">';
+    ansArr.forEach(function(a, i) {
+      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+      html += '<span style="font-size:13px;color:var(--text-secondary);min-width:40px">第' + (i + 1) + '空</span>';
+      html += '<span style="font-size:14px;font-weight:600;color:var(--success)">' + String(a) + '</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  } else if (q.type === 'subjective') {
+    html += '<div style="margin-top:12px;padding:10px 12px;background:rgba(0,0,0,0.04);border-radius:8px">';
+    html += '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">参考答案</div>';
+    html += '<div style="font-size:14px;line-height:1.6">' + (q.answer || '无') + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Edit section
+  html += '<div class="question-card" style="margin:16px 20px">';
+  html += '<div style="font-size:15px;font-weight:700;margin-bottom:12px">修改正确答案</div>';
+
+  if (q.type === 'single') {
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+    ['A', 'B', 'C', 'D'].forEach(function(letter) {
+      var checked = q.answer === letter ? ' checked' : '';
+      html += '<label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:14px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);' + (q.answer === letter ? 'border-color:var(--success);background:#ECFDF5' : '') + '">';
+      html += '<input type="radio" name="edit-answer" value="' + letter + '"' + checked + ' style="accent-color:var(--success)"> ' + letter + '</label>';
+    });
+    html += '</div>';
+  } else if (q.type === 'multi') {
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+    ['A', 'B', 'C', 'D'].forEach(function(letter) {
+      var checked = q.answer && q.answer.indexOf(letter) >= 0 ? ' checked' : '';
+      html += '<label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:14px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);' + (checked ? 'border-color:var(--success);background:#ECFDF5' : '') + '">';
+      html += '<input type="checkbox" name="edit-answer-multi" value="' + letter + '"' + checked + ' style="accent-color:var(--success)"> ' + letter + '</label>';
+    });
+    html += '</div>';
+  } else if (q.type === 'judge') {
+    html += '<div style="display:flex;gap:8px">';
+    html += '<label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:14px;padding:10px 18px;border-radius:8px;border:1.5px solid var(--border);' + (q.answer === 'true' ? 'border-color:var(--success);background:#ECFDF5' : '') + '">';
+    html += '<input type="radio" name="edit-answer-judge" value="true"' + (q.answer === 'true' ? ' checked' : '') + ' style="accent-color:var(--success)"> 正确</label>';
+    html += '<label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:14px;padding:10px 18px;border-radius:8px;border:1.5px solid var(--border);' + (q.answer === 'false' ? 'border-color:var(--danger);background:#FEF2F2' : '') + '">';
+    html += '<input type="radio" name="edit-answer-judge" value="false"' + (q.answer === 'false' ? ' checked' : '') + ' style="accent-color:var(--danger)"> 错误</label>';
+    html += '</div>';
+  } else if (q.type === 'fill') {
+    var ansArr = Array.isArray(q.answer) ? q.answer : [q.answer];
+    html += '<div>';
+    ansArr.forEach(function(a, i) {
+      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+      html += '<span style="font-size:13px;color:var(--text-secondary);min-width:40px">第' + (i + 1) + '空</span>';
+      html += '<input type="text" class="edit-fill-input" data-idx="' + i + '" value="' + String(a).replace(/"/g, '&quot;').replace(/</g, '&lt;') + '" style="flex:1;padding:10px 12px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);font-size:14px;color:var(--text);outline:none">';
+      html += '</div>';
+    });
+    html += '</div>';
+  } else if (q.type === 'subjective') {
+    html += '<textarea id="edit-answer-subjective" style="width:100%;min-height:60px;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);font-size:14px;color:var(--text);outline:none;resize:vertical;line-height:1.6;font-family:inherit">' + String(q.answer || '').replace(/</g, '&lt;') + '</textarea>';
+  }
+
+  // Explanation section
+  html += '<div style="margin-top:16px">';
+  html += '<div style="font-size:15px;font-weight:700;margin-bottom:8px">修改解析（可选）</div>';
+  html += '<textarea id="edit-explanation" style="width:100%;min-height:100px;padding:12px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--card);font-size:14px;color:var(--text);outline:none;resize:vertical;line-height:1.6;font-family:inherit" placeholder="输入解析说明，可以为空">' + (q.explanation || '').replace(/</g, '&lt;') + '</textarea>';
+  html += '</div>';
+
+  html += '</div>';
+
+  body.innerHTML = html;
+  document.getElementById('edit-modal').classList.add('show');
+}
+
+function closeEditModal() {
+  document.getElementById('edit-modal').classList.remove('show');
+}
+
+function saveEdit() {
+  var p = state.practice;
+  var q = p.qs[p.current];
+  if (!q) return;
+  var newAnswer = '';
+  var newExplanation = document.getElementById('edit-explanation').value.trim();
+
+  if (q.type === 'single') {
+    var sel = document.querySelector('input[name="edit-answer"]:checked');
+    if (!sel) { showReward('⚠️', '请选择答案', '请选择一个正确选项'); return; }
+    newAnswer = sel.value;
+  } else if (q.type === 'multi') {
+    var checks = document.querySelectorAll('input[name="edit-answer-multi"]:checked');
+    if (!checks.length) { showReward('⚠️', '请选择答案', '请至少选择一个正确选项'); return; }
+    newAnswer = Array.from(checks).map(function(c) { return c.value; }).sort().join('');
+  } else if (q.type === 'judge') {
+    var sel = document.querySelector('input[name="edit-answer-judge"]:checked');
+    if (!sel) { showReward('⚠️', '请选择答案', '请选择正确或错误'); return; }
+    newAnswer = sel.value;
+  } else if (q.type === 'fill') {
+    var inputs = document.querySelectorAll('.edit-fill-input');
+    var answers = [];
+    for (var i = 0; i < inputs.length; i++) {
+      var v = inputs[i].value;
+      if (!v && v !== '0') { showReward('⚠️', '答案不能为空', '第' + (i + 1) + '空的答案不能为空'); return; }
+      answers.push(v);
+    }
+    newAnswer = answers.length === 1 ? answers[0] : answers;
+  } else if (q.type === 'subjective') {
+    var ta = document.getElementById('edit-answer-subjective');
+    newAnswer = ta ? ta.value : '';
+  }
+
+  if (!newAnswer && newAnswer !== '0' && newAnswer !== 0) {
+    showReward('⚠️', '答案不能为空', '请填写答案');
+    return;
+  }
+
+  showConfirmDialog('确定修改答案/解析吗？', function() {
+    // Update question in practice session's array
+    q.answer = newAnswer;
+    q.explanation = newExplanation;
+
+    // Also update in QUESTIONS array via original index
+    var oi = q.oi !== undefined ? q.oi : -1;
+    if (oi >= 0 && QUESTIONS[oi] && QUESTIONS[oi] !== q) {
+      QUESTIONS[oi].answer = newAnswer;
+      QUESTIONS[oi].explanation = newExplanation;
+    }
+
+    // Persist to storage
+    persistQuestionEdit(oi >= 0 ? oi : p.current);
+
+    closeEditModal();
+
+    // Clear user answer so user can re-answer with updated correct answer
+    p.userAnswers[p.current] = null;
+    // Remove from revealed set if it was revealed
+    if (p.revealed) p.revealed.delete(p.current);
+    // Clear wrong map entry for this question
+    try {
+      var d = JSON.parse(localStorage.getItem('quizAppData_' + _currentBankId) || '{}');
+      if (d.wrongMap && oi >= 0 && d.wrongMap[oi] !== undefined) {
+        delete d.wrongMap[oi];
+        localStorage.setItem('quizAppData_' + _currentBankId, JSON.stringify(d));
+      }
+    } catch(e) {}
+
+    renderPracticeQuestion();
+    renderPracticeNav();
+    showReward('✅', '修改成功', '答案和解析已更新，请重新作答');
+  });
+}
+
+function persistQuestionEdit(qIdx) {
+  var q = QUESTIONS[qIdx];
+  var bankId = _currentBankId;
+  if (bankId === BUILTIN_BANK_ID) {
+    // Save as patches for builtin bank
+    var patches;
+    try { patches = JSON.parse(localStorage.getItem('quizBuiltinPatches') || '{}'); } catch(e) { patches = {}; }
+    patches[qIdx] = { answer: q.answer, explanation: q.explanation || '' };
+    try { localStorage.setItem('quizBuiltinPatches', JSON.stringify(patches)); } catch(e) {}
+  } else {
+    // Update bank's questions array directly
+    var banks;
+    try { banks = JSON.parse(localStorage.getItem('quizBanks') || '[]'); } catch(e) { banks = []; }
+    var bank = banks.find(function(b) { return b.id === bankId; });
+    if (bank && bank.questions && bank.questions[qIdx]) {
+      bank.questions[qIdx].answer = q.answer;
+      bank.questions[qIdx].explanation = q.explanation || '';
+      try { localStorage.setItem('quizBanks', JSON.stringify(banks)); } catch(e) {}
+    }
+  }
 }
 
 // ============ EXAM SHARE ============
@@ -1731,6 +2312,7 @@ let _pageParents = {
   'page-result': 'page-home',
   'page-exam': 'page-exam-intro',
   'page-custom-exam': 'page-exam-intro',
+  'page-edit-default-exam': 'page-exam-intro',
   'page-bank-select': 'page-home',
   'page-import': 'page-bank-select',
   'page-import-help': 'page-import',
@@ -1743,9 +2325,14 @@ function showPage(pageId) {
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
   document.getElementById(pageId).classList.add('active');
   window.scrollTo(0, 0);
+  applyPracticeBackground();
 }
 
 function goBack() {
+  if (document.getElementById('edit-modal').classList.contains('show')) {
+    closeEditModal();
+    return;
+  }
   if (_currentPageId === 'page-practice') {
     exitPractice();
     return;
@@ -1786,7 +2373,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let state = {
   practice: { qs:[], current:0, userAnswers:[], streak:0, mode:'', title:'', qTypes:[] },
   exam: { qs:[], current:0, userAnswers:[], startTime:0, timer:null },
-  navTab: 'single'
+  navTab: 'all'
 };
 
 // ============ STORAGE ============
@@ -1960,7 +2547,7 @@ document.addEventListener('click',function(e){
 });
 
 // ============ INIT ============
-function init(){initBanks();_currentPageId='page-home';updateHome();renderBadges();updateBankButton()}
+function init(){initBanks();applyDarkMode();applyPracticeBackground();applyUiTransparency();_currentPageId='page-home';updateHome();renderBadges();updateBankButton()}
 
 function updateHome(){
   const d=loadData();
@@ -2027,6 +2614,7 @@ function switchTab(tab){
   if(tab==='home'){updateHome();renderBadges();updateBankButton()}
   if(tab==='stats')updateStats();
   if(tab==='settings') updateSettingsUI();
+  applyPracticeBackground();
 }
 
 function getShuffleOptions(){
@@ -2046,6 +2634,165 @@ function updateSettingsUI(){
     if(getShuffleOptions()) el.classList.add('active');
     else el.classList.remove('active');
   }
+  // Dark mode toggle
+  var dm=document.getElementById('dark-mode-toggle');
+  if(dm){
+    if(getDarkMode()) dm.classList.add('active');
+    else dm.classList.remove('active');
+  }
+  // Practice background
+  updateBgSettingsUI();
+}
+
+// ============ DARK MODE ============
+function getDarkMode(){
+  try{return localStorage.getItem('quizApp_darkMode')==='true'}catch(e){return false}
+}
+function setDarkMode(val){
+  try{localStorage.setItem('quizApp_darkMode',val?'true':'false')}catch(e){}
+}
+function toggleDarkMode(){
+  var cur=getDarkMode();
+  setDarkMode(!cur);
+  applyDarkMode();
+  updateSettingsUI();
+}
+function applyDarkMode(){
+  if(getDarkMode()) document.documentElement.classList.add('dark-mode');
+  else document.documentElement.classList.remove('dark-mode');
+  applyUiTransparency();
+}
+
+// ============ PRACTICE BACKGROUND ============
+function getPracticeBg(){
+  try{return JSON.parse(localStorage.getItem('quizApp_bgImage')||'null')}catch(e){return null}
+}
+function setPracticeBg(dataUrl){
+  try{localStorage.setItem('quizApp_bgImage',JSON.stringify(dataUrl))}catch(e){}
+}
+function getBgOpacity(){
+  try{var v=parseFloat(localStorage.getItem('quizApp_bgOpacity'));return isNaN(v)?0.3:v}catch(e){return 0.3}
+}
+function setBgOpacity(val){
+  try{localStorage.setItem('quizApp_bgOpacity',String(val))}catch(e){}
+}
+function getUiTransparency(){
+  try{var v=parseInt(localStorage.getItem('quizApp_uiTransparency'));if(!isNaN(v))return v;var old=parseFloat(localStorage.getItem('quizApp_uiOpacity'));if(!isNaN(old))return Math.round((1-old)*100);return 15}catch(e){return 15}
+}
+function applyUiTransparency(){
+  var t=getUiTransparency();
+  var op=1-t/100;
+  if(op<0)op=0;if(op>1)op=1;
+  document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,'+op+')');
+  document.documentElement.style.setProperty('--card-opacity',String(op));
+  if(document.documentElement.classList.contains('dark-mode')){
+    document.documentElement.style.setProperty('--card-bg','rgba(24,34,52,'+op+')');
+  }
+}
+function onUiOpacityChange(val){
+  var t=parseInt(val);
+  try{localStorage.setItem('quizApp_uiTransparency',String(t))}catch(e){}
+  applyUiTransparency();
+  var label=document.getElementById('ui-opacity-value');
+  if(label) label.textContent=val+'%';
+}
+function triggerBgUpload(){
+  document.getElementById('bg-file-input').click();
+}
+function handleBgFileSelect(event){
+  var file=event.target.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      if(img.width>=img.height){
+        showReward('⚠️','请上传竖版图片','当前图片宽'+img.width+'高'+img.height+'，请上传高度大于宽度的竖版图片');
+        return;
+      }
+      var canvas=document.createElement('canvas');
+      var maxW=720,maxH=1280;
+      var ratio=Math.min(maxW/img.width,maxH/img.height);
+      if(ratio>=1)ratio=1;
+      canvas.width=Math.round(img.width*ratio);
+      canvas.height=Math.round(img.height*ratio);
+      var ctx=canvas.getContext('2d');
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+      var compressed=canvas.toDataURL('image/jpeg',0.7);
+      try{
+        setPracticeBg(compressed);
+        applyPracticeBackground();
+        updateBgSettingsUI();
+        showReward('✅','背景设置成功','刷题页面背景已更新');
+      }catch(err){
+        showReward('⚠️','图片太大','请换一张更小的图片');
+      }
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
+}
+function onBgOpacityChange(val){
+  var opacity=1-parseInt(val)/100;
+  setBgOpacity(opacity);
+  var label=document.getElementById('bg-opacity-value');
+  if(label) label.textContent=val+'%';
+  applyPracticeBackground();
+  var previewImg=document.querySelector('.bg-preview-img');
+  if(previewImg) previewImg.style.opacity=opacity;
+}
+function clearPracticeBg(){
+  showConfirmDialog('确定要清除自定义背景吗？',function(){
+    try{localStorage.removeItem('quizApp_bgImage')}catch(e){}
+    applyPracticeBackground();
+    updateBgSettingsUI();
+  });
+}
+function updateBgSettingsUI(){
+  var bg=getPracticeBg();
+  var previewBox=document.getElementById('bg-preview-box');
+  var previewText=document.getElementById('bg-preview-text');
+  var clearBtn=document.getElementById('bg-clear-btn');
+  var slider=document.getElementById('bg-opacity-slider');
+  var opacityVal=document.getElementById('bg-opacity-value');
+  var op=getBgOpacity();
+  if(slider) slider.value=Math.round((1-op)*100);
+  if(opacityVal) opacityVal.textContent=Math.round((1-op)*100)+'%';
+  if(bg){
+    if(previewBox) previewBox.innerHTML='<img class="bg-preview-img" src="'+bg+'" alt="自定义背景" style="opacity:'+op+'">';
+    if(clearBtn) clearBtn.style.display='inline-block';
+  } else {
+    if(previewBox) previewBox.innerHTML='<span id="bg-preview-text" style="font-size:13px;color:var(--text-secondary)">当前：默认背景</span>';
+    if(clearBtn) clearBtn.style.display='none';
+  }
+  // Update UI transparency slider
+  var uiSlider=document.getElementById('ui-opacity-slider');
+  var uiVal=document.getElementById('ui-opacity-value');
+  var uiT=getUiTransparency();
+  if(uiSlider) uiSlider.value=uiT;
+  if(uiVal) uiVal.textContent=uiT+'%';
+}
+function applyPracticeBackground(){
+  var bg=getPracticeBg();
+  var op=getBgOpacity();
+  var pages=['page-practice','page-exam'];
+  pages.forEach(function(pid){
+    var page=document.getElementById(pid);
+    if(!page)return;
+    var el=page.querySelector('.practice-bg');
+    if(bg){
+      if(!el){
+        el=document.createElement('div');
+        el.className='practice-bg';
+        page.appendChild(el);
+      }
+      el.style.backgroundImage='url('+bg+')';
+      el.style.opacity=op;
+    } else {
+      if(el) el.remove();
+    }
+  });
 }
 
 function updateStats(){
@@ -2150,7 +2897,7 @@ function updateBatchInfo(){
 
 function batchRemoveWrong(){
   if(!_wrongSelected.length){return}
-  showConfirmDialog('确定移除选中的 '+_wrongSelected.length+' 道错题吗？',function(){
+  showConfirmDialog('确定移除 '+_wrongSelected.length+' 道错题吗？',function(){
     const d=loadData();
     _wrongSelected.forEach(function(oi){delete d.wrongMap[oi]});
     saveData(d);
@@ -2194,12 +2941,23 @@ function startWrongPractice(type, startOi){
 }
 
 // ============ FAVORITES PAGE ============
+let _favManageMode = false;
+let _favSelected = [];
+let _favFilterType = 'all';
+
 function showFavPage(){
+  _favManageMode=false;
+  _favSelected=[];
+  const bar=document.getElementById('fav-batch-bar');
+  const btn=document.getElementById('fav-manage-btn');
+  if(bar) bar.style.display='none';
+  if(btn) btn.textContent='管理';
   renderFavFilter('all');
   showPage('page-favorites');
 }
 
 function renderFavFilter(activeType){
+  _favFilterType=activeType;
   const filter=document.getElementById('fav-filter');
   const types=[{t:'all',name:'全部'},{t:'single',name:'单选'},{t:'multi',name:'多选'},{t:'judge',name:'判断'},{t:'fill',name:'填空'},{t:'subjective',name:'主观'}];
   filter.innerHTML=types.map(tp=>{
@@ -2216,6 +2974,10 @@ function renderFavFilter(activeType){
 
   container.innerHTML=list.map(oi=>{
     const q=QUESTIONS[oi];
+    if(_favManageMode){
+      const checked=_favSelected.includes(oi)?'checked':'';
+      return '<div class="wrong-item-wrap"><div class="wrong-item" style="cursor:default" onclick="toggleFavCheck('+oi+')"><div class="wrong-q"><span class="q-type q-type-'+q.type+'">'+TYPE_LABEL[q.type]+'第'+q.typeNum+'题</span> '+q.question.slice(0,50)+'...</div><div class="wrong-meta"><span class="wrong-badge need1" style="background:#FEF3C7;color:#D97706">★ 已收藏</span></div></div><div class="wrong-check'+(_favSelected.includes(oi)?' checked':'')+'" onclick="toggleFavCheck('+oi+')">✓</div></div>';
+    }
     return '<div class="wrong-item" onclick="startFavPractice('+oi+')"><div class="wrong-q"><span class="q-type q-type-'+q.type+'">'+TYPE_LABEL[q.type]+'第'+q.typeNum+'题</span> '+q.question.slice(0,50)+'...</div><div class="wrong-meta"><span class="wrong-badge need1" style="background:#FEF3C7;color:#D97706">★ 已收藏</span></div></div>';
   }).join('');
 }
@@ -2230,6 +2992,62 @@ function startFavPractice(startOi){
   const qs=indices.map(oi=>({...QUESTIONS[oi],oi}));
   _pageParents['page-practice']='page-favorites';
   openPractice(qs,'收藏练习','fav');
+}
+
+function toggleFavManage(){
+  _favManageMode=!_favManageMode;
+  _favSelected=[];
+  const bar=document.getElementById('fav-batch-bar');
+  const btn=document.getElementById('fav-manage-btn');
+  if(_favManageMode){
+    btn.textContent='完成';
+    bar.style.display='flex';
+    updateFavBatchInfo();
+  } else {
+    btn.textContent='管理';
+    bar.style.display='none';
+  }
+  renderFavFilter(_favFilterType);
+}
+
+function toggleFavCheck(oi){
+  const idx=_favSelected.indexOf(oi);
+  if(idx>=0) _favSelected.splice(idx,1);
+  else _favSelected.push(oi);
+  renderFavFilter(_favFilterType);
+  updateFavBatchInfo();
+}
+
+function toggleSelectAllFav(){
+  const list=getFavList(_favFilterType==='all'?null:_favFilterType);
+  if(_favSelected.length===list.length){
+    _favSelected=[];
+  } else {
+    _favSelected=[...list];
+  }
+  renderFavFilter(_favFilterType);
+  updateFavBatchInfo();
+}
+
+function updateFavBatchInfo(){
+  const list=getFavList(_favFilterType==='all'?null:_favFilterType);
+  const info=document.getElementById('fav-batch-info');
+  if(info) info.textContent='已选 '+_favSelected.length+' / '+list.length+' 题';
+}
+
+function batchRemoveFav(){
+  if(!_favSelected.length) return;
+  showConfirmDialog('确定移除 '+_favSelected.length+' 道收藏吗？',function(){
+    const d=loadData();
+    if(!d.favorites) d.favorites=[];
+    _favSelected.forEach(function(oi){
+      d.favorites=d.favorites.filter(function(f){return f!==oi});
+    });
+    saveData(d);
+    _favSelected=[];
+    updateFavBatchInfo();
+    renderFavFilter(_favFilterType);
+  });
 }
 
 // ============ RANDOM PAGE ============
@@ -2383,8 +3201,19 @@ function renderPracticeQuestion(){
 
   if(q.type==='judge'){
     html+='<div class="judge-options">';
-    html+='<button class="judge-btn'+(isAnswered?judgeClass(userAns,true,q):'')+'" data-val="true" '+(isAnswered?'disabled':'')+' onclick="answerJudge(true)">✓ 正确</button>';
-    html+='<button class="judge-btn'+(isAnswered?judgeClass(userAns,false,q):'')+'" data-val="false" '+(isAnswered?'disabled':'')+' onclick="answerJudge(false)">✗ 错误</button>';
+    var _jCorrect = q.answer==='true';
+    var _jTrueCls = '';
+    var _jFalseCls = '';
+    if(isAnswered){
+      _jTrueCls = 'disabled';
+      _jFalseCls = 'disabled';
+      if(_jCorrect) _jTrueCls += ' correct';
+      else _jFalseCls += ' correct';
+      if(userAns===true && !_jCorrect) _jTrueCls += ' wrong';
+      if(userAns===false && _jCorrect) _jFalseCls += ' wrong';
+    }
+    html+='<button class="judge-btn '+_jTrueCls+'" data-val="true" '+(isAnswered?'disabled':'')+' onclick="answerJudge(true)">✓ 正确</button>';
+    html+='<button class="judge-btn '+_jFalseCls+'" data-val="false" '+(isAnswered?'disabled':'')+' onclick="answerJudge(false)">✗ 错误</button>';
     html+='</div>';
   } else if(q.type==='fill'){
     // Render fill-in-the-blank inputs
@@ -2445,7 +3274,7 @@ function renderPracticeQuestion(){
         if(wasSelected&&!correctIdxs.includes(i)) cls+=' wrong';
         if(wasSelected&&correctIdxs.includes(i)) cls+=' correct';
       } else {
-        if(p._multiSel && p._multiSel.includes(i)) cls='selected';
+        if(p._multiSel && p._multiSel.includes(i)) cls='multi-sel';
       }
       html+='<div class="option-item '+cls+'" data-idx="'+i+'" onclick="selectOption(this,'+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>';
     });
@@ -2459,7 +3288,7 @@ function renderPracticeQuestion(){
       let cls='';
       if(isAnswered){
         cls='disabled';
-        if(i===correctIdx) cls+=' show-correct';
+        if(i===correctIdx) cls+=' show-correct single-correct';
         else if(displayAns===i) cls+=' wrong';
       }
       html+='<div class="option-item '+cls+'" data-idx="'+i+'" onclick="selectOption(this,'+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>';
@@ -2496,13 +3325,18 @@ function renderPracticeQuestion(){
   // Navigation buttons
   const isFirst=p.current===0, isLast=p.current>=p.qs.length-1;
   html+='<div class="bottom-actions">';
-  if(!isFirst) html+='<button class="btn btn-outline" onclick="prevQuestion()">上一题</button>';
+  if(!isFirst) html+='<button class="btn" style="background:#1827E4;color:white;border:none" onclick="prevQuestion()">上一题</button>';
   if(!isLast){
     html+='<button class="btn btn-primary" onclick="nextQuestion()">下一题</button>';
   } else {
     html+='<button class="btn btn-success" onclick="finishPractice()">完成</button>';
   }
   html+='</div>';
+
+  // Edit answer/explanation link (only when answered and not exam-review)
+  if(isAnswered && p.mode!=='exam-review'){
+    html+='<div style="text-align:center;padding:0 20px 12px"><span style="font-size:12px;color:var(--text-secondary);text-decoration:underline;cursor:pointer" onclick="showEditModal()">有问题？编辑答案或解析</span></div>';
+  }
 
   document.getElementById('practice-content').innerHTML=html;
   // Restore original options/answer
@@ -2579,7 +3413,7 @@ function selectOption(el,idx){
   } else {
     // Multi toggle
     if(!p._multiSel) p._multiSel=[];
-    el.classList.toggle('selected');
+    el.classList.toggle('multi-sel');
     const pos=p._multiSel.indexOf(idx);
     if(pos>=0) p._multiSel.splice(pos,1); else p._multiSel.push(idx);
     p._multiSel.sort();
@@ -2819,6 +3653,7 @@ function showPracticeResult(){
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--danger);font-weight:600">'+userText+'</span></div>';
           html+='<div style="font-size:13px">正确答案：<span style="color:var(--success);font-weight:600">'+correctText+'</span></div>';
         } else if(q.type==='single'){
+          if(q.options){q.options.forEach(function(opt,oi){html+='<div style="font-size:13px;padding:4px 0;color:var(--text)">'+letters[oi]+'. '+opt+'</div>'});html+='<div style="height:6px"></div>';}
           const userText=ans!==null?letters[ans]+'. '+(q.options[ans]||''):'未作答';
           const ci=q.answer.charCodeAt(0)-65;
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--danger);font-weight:600">'+userText+'</span></div>';
@@ -2834,6 +3669,7 @@ function showPracticeResult(){
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--primary);font-weight:600">'+(ans||'未作答')+'</span></div>';
           html+='<div style="font-size:13px">参考答案：<span style="color:var(--text-secondary);font-weight:600">'+(q.answer||'无')+'</span></div>';
         } else {
+          if(q.options){q.options.forEach(function(opt,oi){html+='<div style="font-size:13px;padding:4px 0;color:var(--text)">'+letters[oi]+'. '+opt+'</div>'});html+='<div style="height:6px"></div>';}
           const cl=q.answer.split('');
           const userText=ans&&Array.isArray(ans)?ans.map(a=>letters[a]).join(''):'未作答';
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--danger);font-weight:600">'+(userText||'未作答')+'</span></div>';
@@ -2996,12 +3832,16 @@ function startRandomPractice(mode,count){
 // ============ NAV OVERLAY (exam only) ============
 function openNavOverlay(){
   const overlay=document.getElementById('nav-overlay');
+  const examMode=document.getElementById('page-exam').getAttribute('data-exam-mode')==='true';
   overlay.classList.add('show');
+  if(examMode) overlay.classList.add('exam-mode'); else overlay.classList.remove('exam-mode');
   const types=[...new Set(state.exam.qs.map(q=>q.type))];
   const tabsEl=document.getElementById('nav-type-tabs');
   if(types.length>1){
     tabsEl.style.display='flex';
-    tabsEl.innerHTML=types.map(t=>'<div class="nav-type-tab'+(state.navTab===t?' active':'')+'" onclick="switchNavTab(\''+t+'\')">'+TYPE_LABEL[t]+'</div>').join('');
+    var tabsHtml='<div class="nav-type-tab'+(state.navTab==='all'?' active':'')+'" onclick="switchNavTab(\'all\')">全部</div>';
+    tabsHtml+=types.map(t=>'<div class="nav-type-tab'+(state.navTab===t?' active':'')+'" onclick="switchNavTab(\''+t+'\')">'+TYPE_LABEL[t]+'</div>').join('');
+    tabsEl.innerHTML=tabsHtml;
   } else {
     tabsEl.style.display='none';
     state.navTab=types[0];
@@ -3012,7 +3852,10 @@ function openNavOverlay(){
 function switchNavTab(t){
   state.navTab=t;
   document.querySelectorAll('#nav-type-tabs .nav-type-tab').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('#nav-type-tabs .nav-type-tab').forEach(el=>{if(el.textContent===TYPE_LABEL[t])el.classList.add('active')});
+  document.querySelectorAll('#nav-type-tabs .nav-type-tab').forEach(el=>{
+    if(t==='all'&&el.textContent==='全部')el.classList.add('active');
+    else if(el.textContent===TYPE_LABEL[t])el.classList.add('active');
+  });
   renderNavDots();
 }
 
@@ -3023,37 +3866,155 @@ function renderNavDots(){
   const tab=state.navTab;
   const examMode=document.getElementById('page-exam').getAttribute('data-exam-mode')==='true';
   const dotsEl=document.getElementById('nav-dots');
+  const showAll=tab==='all';
   let html='';
   qs.forEach((q,i)=>{
-    if(q.type!==tab)return;
+    if(!showAll&&q.type!==tab)return;
     let cls='';
     if(userAnswers[i]!==null){
-      if(examMode){cls='answered'}
+      if(examMode){cls='exam-answered'}
       else{const res=checkResult(q,userAnswers[i]);cls=res.correct?'done-correct':'done-wrong'}
     }
     if(i===current) cls=cls?cls+' current':'current';
-    html+='<div class="nav-dot '+cls+'" onclick="goToExamQ('+i+')">'+(i+1)+'</div>';
+    if(showAll) cls+=' nav-has-type';
+    var typeIndicator='';
+    if(showAll){
+      var typeShort={single:'单',multi:'多',judge:'判',fill:'填',subjective:'主'};
+      typeIndicator='<span class="nav-type-dot nav-type-dot-'+q.type+'">'+(typeShort[q.type]||'')+'</span>';
+    }
+    html+='<div class="nav-dot '+cls+'" onclick="goToExamQ('+i+')">'+(i+1)+typeIndicator+'</div>';
   });
   dotsEl.innerHTML=html;
 }
 
 function closeNavOverlay(){document.getElementById('nav-overlay').classList.remove('show')}
 
+// ============ DEFAULT EXAM CONFIG ============
+function getDefaultExamConfig(){
+  try{
+    var saved=localStorage.getItem('defaultExamConfig');
+    if(saved) return JSON.parse(saved);
+  }catch(e){}
+  return {
+    single:{enabled:true,count:40,score:0.5},
+    multi:{enabled:true,count:15,score:1,partialScore:0.5},
+    judge:{enabled:true,count:10,score:0.5},
+    fill:{enabled:false,count:0,score:1,mode:'per-question'},
+    subjective:{enabled:false,count:0,score:2}
+  };
+}
+function saveDefaultExamConfig(cfg){
+  try{localStorage.setItem('defaultExamConfig',JSON.stringify(cfg))}catch(e){}
+}
+
+function showEditDefaultExam(){
+  var cfg = getDefaultExamConfig();
+  var html = '';
+  var types = [
+    {key:'single',name:'单选题',label:'单选',cssClass:'q-type-single'},
+    {key:'multi',name:'多选题',label:'多选',cssClass:'q-type-multi'},
+    {key:'judge',name:'判断题',label:'判断',cssClass:'q-type-judge'},
+    {key:'fill',name:'填空题',label:'填空',cssClass:'q-type-fill'},
+    {key:'subjective',name:'主观题',label:'主观',cssClass:'q-type-subjective'}
+  ];
+  types.forEach(function(t){
+    var c = cfg[t.key];
+    var activeClass = c.enabled ? ' active' : '';
+    var showClass = c.enabled ? ' show' : '';
+    var avail = QUESTIONS.filter(function(q){return q.type===t.key}).length;
+    html += '<div class="custom-type-card" id="def-cf-card-'+t.key+'">';
+    html += '<div class="custom-type-header"><div class="custom-type-title"><span class="q-type '+t.cssClass+'">'+t.label+'</span>'+t.name+'</div><button class="custom-toggle'+activeClass+'" id="def-cf-'+t.key+'-toggle" onclick="toggleDefaultExamType(\''+t.key+'\')"></button></div>';
+    html += '<div class="custom-fields'+showClass+'" id="def-cf-'+t.key+'-fields">';
+    html += '<div class="custom-field"><label>题目数量</label><input type="number" id="def-cf-'+t.key+'-count" value="'+c.count+'" min="0" max="'+avail+'"><span class="unit">道</span><span class="avail" style="font-size:11px;color:var(--text-secondary)">（共'+avail+'道）</span></div>';
+    html += '<div class="custom-field"><label>每题分值</label><input type="number" id="def-cf-'+t.key+'-score" value="'+c.score+'" min="0.1" step="0.1"><span class="unit">分</span></div>';
+    if(t.key==='multi'){
+      html += '<div class="custom-field"><label>选不全得分</label><input type="number" id="def-cf-multi-partial" value="'+(c.partialScore||0.5)+'" min="0" step="0.1"><span class="unit">分</span></div>';
+    }
+    html += '</div></div>';
+  });
+  document.getElementById('default-exam-form').innerHTML = html;
+  _pageParents['page-edit-default-exam']='page-exam-intro';
+  showPage('page-edit-default-exam');
+}
+
+function toggleDefaultExamType(type){
+  var toggle = document.getElementById('def-cf-'+type+'-toggle');
+  var fields = document.getElementById('def-cf-'+type+'-fields');
+  if(toggle.classList.contains('active')){
+    toggle.classList.remove('active');
+    fields.classList.remove('show');
+  } else {
+    toggle.classList.add('active');
+    fields.classList.add('show');
+  }
+}
+
+function saveDefaultExamSettings(){
+  var types = ['single','multi','judge','fill','subjective'];
+  var cfg = {};
+  types.forEach(function(t){
+    var toggle = document.getElementById('def-cf-'+t+'-toggle');
+    var countEl = document.getElementById('def-cf-'+t+'-count');
+    var scoreEl = document.getElementById('def-cf-'+t+'-score');
+    var enabled = toggle && toggle.classList.contains('active');
+    var count = countEl ? parseInt(countEl.value)||0 : 0;
+    var score = scoreEl ? parseFloat(scoreEl.value)||0.5 : 0.5;
+    cfg[t] = {enabled:enabled, count:count, score:score};
+    if(t==='multi'){
+      var partialEl = document.getElementById('def-cf-multi-partial');
+      cfg[t].partialScore = partialEl ? parseFloat(partialEl.value)||0.5 : 0.5;
+    }
+    if(t==='fill'){
+      cfg[t].mode = 'per-question';
+    }
+  });
+  saveDefaultExamConfig(cfg);
+  showReward('✅','设置已保存','下次模拟考试将使用新设置');
+  goBack();
+  setTimeout(function(){updateExamIntroRules()}, 300);
+}
+
+function updateExamIntroRules(){
+  var cfg = getDefaultExamConfig();
+  var el = document.getElementById('exam-rules-content');
+  if(!el) return;
+  var html = '';
+  var qNum = 0;
+  var totalScore = 0;
+  var types = [
+    {key:'single',name:'单选题'},
+    {key:'multi',name:'多选题'},
+    {key:'judge',name:'判断题'},
+    {key:'fill',name:'填空题'},
+    {key:'subjective',name:'主观题'}
+  ];
+  types.forEach(function(t){
+    var c = cfg[t.key];
+    if(!c.enabled || c.count<=0) return;
+    var avail = QUESTIONS.filter(function(q){return q.type===t.key}).length;
+    var actualCount = Math.min(c.count, avail);
+    var start = qNum + 1;
+    var end = qNum + actualCount;
+    var range = actualCount > 1 ? '（第'+start+'-'+end+'题）' : '（第'+start+'题）';
+    qNum += actualCount;
+    html += '<div class="rule"><span class="dot"></span>'+t.name+' '+actualCount+' 道'+range+'，每道 '+c.score+' 分</div>';
+    if(t.key==='multi'){
+      var pScore = c.partialScore || 0.5;
+      html += '<div class="rule"><span class="dot" style="background:var(--warning)"></span>&nbsp;&nbsp;多选选不全得 '+pScore+' 分，错选 0 分</div>';
+    }
+    totalScore += actualCount * c.score;
+  });
+  if(qNum === 0){
+    html = '<div class="rule" style="color:var(--danger)">⚠️ 请至少启用一种题型</div>';
+  } else {
+    html += '<div class="rule" style="margin-top:8px;font-weight:600;color:var(--text)"><span class="dot" style="background:var(--danger)"></span>总分 '+totalScore+' 分</div>';
+  }
+  el.innerHTML = html;
+}
+
 // ============ EXAM ============
 function showExamIntro(){
-  var sc = QUESTIONS.filter(function(q){return q.type==='single'}).length;
-  var mc = QUESTIONS.filter(function(q){return q.type==='multi'}).length;
-  var jc = QUESTIONS.filter(function(q){return q.type==='judge'}).length;
-  var sCount = Math.min(sc, 40), mCount = Math.min(mc, 15), jCount = Math.min(jc, 10);
-  var totalScore = sCount * 0.5 + mCount * 1 + jCount * 0.5;
-  var rulesEl = document.querySelector('#page-exam-intro .exam-rules');
-  if (rulesEl) {
-    rulesEl.innerHTML = '<div class="rule"><span class="dot"></span>单选题 '+sCount+' 道，每道 0.5 分</div>' +
-      '<div class="rule"><span class="dot"></span>多选题 '+mCount+' 道，每道 1 分</div>' +
-      '<div class="rule"><span class="dot" style="background:var(--warning)"></span>&nbsp;&nbsp;多选选不全得 0.5 分，错选 0 分</div>' +
-      '<div class="rule"><span class="dot"></span>判断题 '+jCount+' 道，每道 0.5 分</div>' +
-      '<div class="rule" style="margin-top:8px;font-weight:600;color:var(--text)"><span class="dot" style="background:var(--danger)"></span>总分 '+totalScore+' 分</div>';
-  }
+  updateExamIntroRules();
   showPage('page-exam-intro');
 }
 
@@ -3257,27 +4218,29 @@ function startCustomExam(){
 }
 
 function startExam(){
-  var sc = QUESTIONS.filter(function(q){return q.type==='single'}).length;
-  var mc = QUESTIONS.filter(function(q){return q.type==='multi'}).length;
-  var jc = QUESTIONS.filter(function(q){return q.type==='judge'}).length;
-  if (sc < 5 || mc < 3 || jc < 3) {
-    showReward('⚠️', '题目不足', '模拟考试需要至少5道单选、3道多选、3道判断题');
+  var cfg = getDefaultExamConfig();
+  var qs=[];
+  var types=['single','multi','judge','fill','subjective'];
+  types.forEach(function(t){
+    var c=cfg[t];
+    if(!c||!c.enabled||!c.count) return;
+    var avail=QUESTIONS.filter(function(q){return q.type===t});
+    if(avail.length===0) return;
+    qs=qs.concat(shuffle(avail).slice(0,Math.min(c.count,avail.length)));
+  });
+  if(qs.length===0){
+    showReward('⚠️','无法开始','请在默认设置中至少启用一种题型');
     return;
   }
-  const singles=shuffle(QUESTIONS.filter(q=>q.type==='single')).slice(0,Math.min(40,sc));
-  const multis=shuffle(QUESTIONS.filter(q=>q.type==='multi')).slice(0,Math.min(15,mc));
-  const judges=shuffle(QUESTIONS.filter(q=>q.type==='judge')).slice(0,Math.min(10,jc));
-  const qs=[...singles,...multis,...judges];
-  // Re-number for exam display
   let num=0;
-  qs.forEach(q=>{num++;q.examNum=num});
+  qs.forEach(function(q){num++;q.examNum=num});
 
-  state.exam={qs,current:0,userAnswers:new Array(qs.length).fill(null),startTime:Date.now(),timer:null,finished:false};
-  state.examConfig=null;
+  state.exam={qs:qs,current:0,userAnswers:new Array(qs.length).fill(null),startTime:Date.now(),timer:null,finished:false};
+  state.examConfig={custom:true,single:cfg.single,multi:cfg.multi,judge:cfg.judge,fill:cfg.fill,subjective:cfg.subjective};
   var _eb = getActiveBank();
   state.exam.bankName = _eb ? _eb.name : '题库';
   state.exam.timer=setInterval(updateTimer,1000);
-  try{localStorage.setItem('_redoExam',JSON.stringify({qIds:qs.map(function(q){return{type:q.type,typeNum:q.typeNum}}),config:null,bankName:state.exam.bankName}))}catch(e){}
+  try{localStorage.setItem('_redoExam',JSON.stringify({qIds:qs.map(function(q){return{type:q.type,typeNum:q.typeNum}}),config:state.examConfig,bankName:state.exam.bankName}))}catch(e){}
 
   _pageParents['page-exam']='page-exam-intro';
   document.getElementById('page-exam').setAttribute('data-exam-mode','true');
@@ -3295,17 +4258,6 @@ function renderExamQuestion(){
   const e=state.exam;
   const q=e.qs[e.current];
   document.getElementById('exam-progress').textContent=(e.current+1)+' / '+e.qs.length;
-
-  // Dots
-  let dotsHtml='',lastType='';
-  e.qs.forEach((qq,i)=>{
-    if(qq.type!==lastType){if(lastType)dotsHtml+='<div style="width:8px"></div>';lastType=qq.type}
-    let cls='';
-    if(e.userAnswers[i]!==null)cls='exam-answered';
-    if(i===e.current)cls=cls?cls+' current':'current';
-    dotsHtml+='<div class="q-dot '+cls+'" onclick="goToExamQ('+i+')">'+(i+1)+'</div>';
-  });
-  document.getElementById('exam-dots').innerHTML=dotsHtml;
 
   const userAns=e.userAnswers[e.current];
   const isAnswered=userAns!==null;
@@ -3415,14 +4367,14 @@ function renderExamQuestion(){
     const sel=userAns||[];
     html+='<div class="options-list">';
     q.options.forEach((opt,i)=>{
-      html+='<div class="option-item'+(sel.includes(i)?' selected':'')+'" onclick="examSelectMulti('+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>';
+      html+='<div class="option-item'+(sel.includes(i)?' multi-sel':'')+'" onclick="examSelectMulti('+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>';
     });
     html+='</div>';
   } else {
     const letters=['A','B','C','D'];
     html+='<div class="options-list">';
     q.options.forEach((opt,i)=>{
-      html+='<div class="option-item'+(userAns===i?' selected':'')+'" onclick="examSelectSingle('+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>';
+      html+='<div class="option-item'+(userAns===i?' exam-sel':'')+'" onclick="examSelectSingle('+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>';
     });
     html+='</div>';
   }
@@ -3430,7 +4382,7 @@ function renderExamQuestion(){
   const isFirst=e.current===0, isLast=e.current>=e.qs.length-1;
   const allAnswered=e.userAnswers.every(a=>a!==null);
   html+='<div class="bottom-actions">';
-  if(!isFirst) html+='<button class="btn btn-outline" onclick="goToExamQ('+(e.current-1)+')">上一题</button>';
+  if(!isFirst) html+='<button class="btn" style="background:#1827E4;color:white;border:none" onclick="goToExamQ('+(e.current-1)+')">上一题</button>';
   if(allAnswered) html+='<button class="btn btn-success" onclick="finishExam()">交卷</button>';
   if(!isLast) html+='<button class="btn btn-primary" onclick="goToExamQ('+(e.current+1)+')">下一题</button>';
   else if(!allAnswered) html+='<button class="btn btn-primary" onclick="finishExam()">交卷</button>';
@@ -3482,7 +4434,7 @@ function examConfirmSubjective(){
   if(state.exam.current < state.exam.qs.length-1) setTimeout(function(){goToExamQ(state.exam.current+1)}, 300);
 }
 
-function goToExamQ(idx){state.exam.current=idx;renderExamQuestion()}
+function goToExamQ(idx){state.exam.current=idx;renderExamQuestion();renderNavDots()}
 function exitExam(){
   const e=state.exam;
   if(!e.finished){
@@ -3676,6 +4628,7 @@ function showExamResult(score,sc,ms,jc,fc,wrongList,ssc){
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--danger);font-weight:600">'+userText+'</span></div>';
           html+='<div style="font-size:13px">正确答案：<span style="color:var(--success);font-weight:600">'+correctText+'</span></div>';
         } else if(q.type==='single'){
+          if(q.options){q.options.forEach(function(opt,oi){html+='<div style="font-size:13px;padding:4px 0;color:var(--text)">'+letters[oi]+'. '+opt+'</div>'});html+='<div style="height:6px"></div>';}
           const userText=ans!==null?letters[ans]+'. '+(q.options[ans]||''):'未作答';
           const ci=q.answer.charCodeAt(0)-65;
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--danger);font-weight:600">'+userText+'</span></div>';
@@ -3691,6 +4644,7 @@ function showExamResult(score,sc,ms,jc,fc,wrongList,ssc){
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--primary);font-weight:600">'+(ans||'未作答')+'</span></div>';
           html+='<div style="font-size:13px">参考答案：<span style="color:var(--text-secondary);font-weight:600">'+(q.answer||'无')+'</span></div>';
         } else {
+          if(q.options){q.options.forEach(function(opt,oi){html+='<div style="font-size:13px;padding:4px 0;color:var(--text)">'+letters[oi]+'. '+opt+'</div>'});html+='<div style="height:6px"></div>';}
           const cl=q.answer.split('');
           const userText=ans&&Array.isArray(ans)?ans.map(a=>letters[a]).join(''):'未作答';
           html+='<div style="font-size:13px">你的答案：<span style="color:var(--danger);font-weight:600">'+(userText||'未作答')+'</span></div>';
