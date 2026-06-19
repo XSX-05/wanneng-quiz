@@ -10,7 +10,7 @@
 <meta http-equiv="Expires" content="0">
 <title>万能刷题通</title>
 <style>
-:root{--primary:#DC2626;--primary-light:#F87171;--primary-dark:#991B1B;--success:#10B981;--warning:#F59E0B;--danger:#EF4444;--bg:#F8FAFC;--card:#FFFFFF;--text:#1E293B;--text-secondary:#64748B;--border:#E2E8F0;--shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 8px 24px rgba(0,0,0,0.12);--radius:16px;--radius-sm:10px;--card-bg:rgba(255,255,255,0.85);--card-opacity:0.85}
+:root{--primary:#DC2626;--primary-light:#F87171;--primary-dark:#991B1B;--primary-bg:#FEE2E2;--primary-bg-dark:#FECACA;--primary-bg-deep:#7F1D1D;--primary-bg-rgb:254,226,226;--sel-bg-rgb:254,242,242;--sel-bg-dm-rgb:59,28,28;--success:#10B981;--warning:#F59E0B;--danger:#EF4444;--bg:#F8FAFC;--card:#FFFFFF;--text:#1E293B;--text-secondary:#64748B;--border:#E2E8F0;--shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 8px 24px rgba(0,0,0,0.12);--radius:16px;--radius-sm:10px;--card-bg:rgba(255,255,255,0.85);--card-opacity:0.85}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
 .app{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
@@ -31,9 +31,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .menu-card .icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px}
 .menu-card .title{font-size:15px;font-weight:600}
 .menu-card .desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.4}
-.icon-practice{background:linear-gradient(135deg,#FEE2E2,#FECACA)}
+.icon-practice{background:linear-gradient(135deg,var(--primary-bg),var(--primary-bg-dark))}
 .icon-exam{background:linear-gradient(135deg,#D1FAE5,#A7F3D0)}
-.icon-wrong{background:linear-gradient(135deg,#FEE2E2,#FECACA)}
+.icon-wrong{background:linear-gradient(135deg,var(--primary-bg),var(--primary-bg-dark))}
 .icon-stats{background:linear-gradient(135deg,#FEF3C7,#FDE68A)}
 .reward-section{padding:16px 20px}
 .reward-title{font-size:16px;font-weight:600;margin-bottom:12px}
@@ -53,7 +53,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .page.active{display:block}
 .question-card{background:var(--card-bg);border-radius:var(--radius);margin:16px 20px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);transition:border-color 0.2s,box-shadow 0.2s}
 .q-type{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:10px}
-.q-type-single{background:#FEE2E2;color:#DC2626}
+.q-type-single{background:var(--primary-bg);color:var(--primary)}
 .q-type-multi{background:#D1FAE5;color:#059669}
 .q-type-judge{background:#FEF3C7;color:#D97706}
 .q-type-fill{background:#EDE9FE;color:#7C3AED}
@@ -64,7 +64,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .options-list{padding:0 20px 20px}
 .option-item{background:var(--card-bg);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;cursor:pointer;transition:border-color 0.2s,background-color 0.2s,transform 0.2s,box-shadow 0.2s}
 .option-item:active{transform:scale(0.98)}
-.option-item.selected{border-color:var(--primary);background:rgba(254,242,242,var(--card-opacity))}
+.option-item.selected{border-color:var(--primary);background:rgba(var(--sel-bg-rgb),var(--card-opacity))}
 .option-item.correct{border-color:var(--success);background:rgba(209,250,229,var(--card-opacity))}
 .option-item.wrong{border-color:var(--danger);background:rgba(254,242,242,var(--card-opacity))}
 .option-item.show-correct{border-color:var(--success);background:rgba(209,250,229,var(--card-opacity))}
@@ -83,7 +83,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .judge-options{display:flex;gap:14px;padding:0 20px 20px}
 .judge-btn{flex:1;padding:20px;border-radius:var(--radius);border:2px solid var(--border);background:var(--card-bg);font-size:16px;font-weight:600;cursor:pointer;transition:border-color 0.2s,background-color 0.2s,transform 0.2s;text-align:center}
 .judge-btn:active{transform:scale(0.97)}
-.judge-btn.selected{border-color:var(--primary);background:rgba(254,242,242,var(--card-opacity))}
+.judge-btn.selected{border-color:var(--primary);background:rgba(var(--sel-bg-rgb),var(--card-opacity))}
 .judge-btn.correct{border-color:var(--success);background:rgba(236,253,245,var(--card-opacity))}
 .judge-btn.wrong{border-color:var(--danger);background:rgba(254,242,242,var(--card-opacity))}
 .judge-btn.disabled{pointer-events:none;opacity:0.85}
@@ -173,7 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .q-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
 .q-dot.current{border-color:#FBBF24;background:#FBBF24;color:white}
 .q-dot.current.exam-answered{border-color:#FBBF24;background:#FBBF24;color:white}
-.q-dot.answered{border-color:var(--primary-light);background:#FEF2F2;color:var(--primary)}
+.q-dot.answered{border-color:var(--primary-light);background:var(--primary-bg);color:var(--primary)}
 .q-dot.exam-answered{border-color:#FBBF24;background:#FEF9C3;color:#B45309}
 .q-dot.correct-dot{border-color:var(--success);background:#ECFDF5;color:var(--success)}
 .q-dot.wrong-dot{border-color:var(--danger);background:#FEF2F2;color:var(--danger)}
@@ -186,7 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .result-detail .val{font-size:18px;font-weight:700}
 .result-detail .lbl{font-size:11px;color:var(--text-secondary);margin-top:2px}
 .result-msg{margin-top:16px;font-size:15px;color:var(--text-secondary);line-height:1.5}
-.reward-popup{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.reward-popup{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s}
 .reward-popup.show{opacity:1;pointer-events:auto}
 .reward-content{background:var(--card);border-radius:var(--radius);padding:32px;text-align:center;max-width:300px;transform:scale(0.8);transition:transform 0.3s}
 .reward-popup.show .reward-content{transform:scale(1)}
@@ -198,7 +198,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .wrong-q{font-size:14px;line-height:1.5;margin-bottom:6px}
 .wrong-meta{font-size:12px;color:var(--text-secondary);display:flex;gap:12px}
 .wrong-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600}
-.wrong-badge.need2{background:#FEE2E2;color:#DC2626}
+.wrong-badge.need2{background:var(--primary-bg);color:var(--primary)}
 .wrong-badge.need1{background:#FEF3C7;color:#D97706}
 .empty-state{text-align:center;padding:60px 20px;color:var(--text-secondary)}
 .empty-state .emoji{font-size:48px;margin-bottom:12px}
@@ -217,7 +217,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .fade-in{animation:slideIn 0.25s ease}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .pulse{animation:pulse 0.3s ease}
-.confirm-bar{padding:12px 20px;position:sticky;bottom:0;background:var(--bg)}
+.confirm-bar{padding:12px 20px;position:sticky;bottom:0;background:transparent}
 .btn-confirm{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;background:var(--primary);color:white;font-size:15px;font-weight:600;cursor:pointer}
 .btn-confirm:disabled{background:#94A3B8}
 
@@ -229,13 +229,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .nav-close{width:28px;height:28px;border-radius:50%;border:none;background:var(--border);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .nav-type-tabs{display:flex;padding:12px 20px 0;gap:8px;flex-shrink:0}
 .nav-type-tab{flex:1;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);background:transparent;font-size:12px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.2s}
-.nav-type-tab.active{border-color:var(--primary);background:#FEF2F2;color:var(--primary)}
+.nav-type-tab.active{border-color:var(--primary);background:var(--primary-bg);color:var(--primary)}
 .nav-dots{display:flex;flex-wrap:wrap;gap:8px;padding:16px 20px 24px;overflow-y:auto}
 .nav-dot{width:42px;height:42px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
 .nav-dot.current{border-color:#FBBF24;background:#FBBF24;color:white;box-shadow:0 0 0 3px rgba(251,191,36,0.4)}
 .nav-dot.current.done-correct{border-color:#10B981;background:#10B981;color:white;box-shadow:0 0 0 3px rgba(16,185,129,0.4)}
 .nav-dot.current.done-wrong{border-color:#EF4444;background:#EF4444;color:white;box-shadow:0 0 0 3px rgba(239,68,68,0.4)}
-.nav-dot.done,.nav-dot.answered{border-color:var(--primary-light);background:#FEF2F2;color:var(--primary)}
+.nav-dot.done,.nav-dot.answered{border-color:var(--primary-light);background:var(--primary-bg);color:var(--primary)}
 .nav-overlay.exam-mode .nav-dot.done,.nav-overlay.exam-mode .nav-dot.answered{border-color:#F59E0B;background:#FDE68A;color:#92400E}
 #page-exam[data-exam-mode="true"] .nav-dot.current{border-color:#FBBF24;background:#FBBF24;color:white}
 .nav-overlay.exam-mode .nav-dot.done.current,.nav-overlay.exam-mode .nav-dot.answered.current{border-color:#FBBF24;background:#FBBF24;color:white;box-shadow:0 0 0 3px rgba(251,191,36,0.4)}
@@ -245,14 +245,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .nav-dot.done-wrong{border-color:var(--danger);background:#FEF2F2;color:var(--danger)}
 .nav-dot.nav-has-type{position:relative}
 .nav-dot .nav-type-dot{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;line-height:1;box-shadow:0 0 0 1.5px var(--card)}
-.nav-type-dot-single{background:#DC2626}
+.nav-type-dot-single{background:var(--primary)}
 .nav-type-dot-multi{background:#059669}
 .nav-type-dot-judge{background:#D97706}
 .nav-type-dot-fill{background:#7C3AED}
 .nav-type-dot-subjective{background:#2563EB}
 .type-filter-row{display:flex;gap:8px;padding:12px 20px;flex-wrap:wrap}
 .type-chip{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.2s}
-.type-chip.active{border-color:var(--primary);background:#FEF2F2;color:var(--primary)}
+.type-chip.active{border-color:var(--primary);background:var(--primary-bg);color:var(--primary)}
 .type-chip .cnt{font-size:11px;margin-left:4px;opacity:0.7}
 
 /* Group selection cards */
@@ -282,7 +282,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .pnav-dot.current{border-color:#FBBF24;background:#FBBF24;color:white}
 .pnav-dot.current.correct-dot{border-color:#10B981;background:#10B981;color:white}
 .pnav-dot.current.wrong-dot{border-color:#EF4444;background:#EF4444;color:white}
-.pnav-dot.answered{border-color:var(--primary-light);background:#FEF2F2;color:var(--primary)}
+.pnav-dot.answered{border-color:var(--primary-light);background:var(--primary-bg);color:var(--primary)}
 .pnav-dot.correct-dot{border-color:var(--success);background:#ECFDF5;color:var(--success)}
 .pnav-dot.wrong-dot{border-color:var(--danger);background:#FEF2F2;color:var(--danger)}
 
@@ -351,7 +351,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 /* Bank selection page */
 .bank-item{background:var(--card);border-radius:var(--radius-sm);padding:16px 18px;margin:0 20px 10px;box-shadow:var(--shadow);border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;transition:all 0.2s}
 .bank-item:active{transform:scale(0.98);border-color:var(--primary)}
-.bank-item.active{border-color:var(--primary);background:#FEF2F2}
+.bank-item.active{border-color:var(--primary);background:var(--primary-bg)}
 .bank-item .bank-info{flex:1;min-width:0}
 .bank-item .bank-title{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
 .bank-item .bank-title .built-in-tag{font-size:10px;padding:1px 6px;border-radius:8px;background:#E0E7FF;color:#4338CA;font-weight:600}
@@ -361,7 +361,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .bank-del-btn{width:28px;height:28px;border-radius:50%;border:none;background:rgba(239,68,68,0.08);color:var(--danger);font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:8px}
 .bank-del-btn:active{background:rgba(239,68,68,0.2)}
 .import-card{background:var(--card);border-radius:var(--radius);margin:0 20px 14px;padding:20px;box-shadow:var(--shadow);border:2px dashed var(--primary-light);cursor:pointer;text-align:center;transition:all 0.2s}
-.import-card:active{border-color:var(--primary);background:#FEF2F2}
+.import-card:active{border-color:var(--primary);background:var(--primary-bg)}
 .import-card .import-icon{font-size:36px;margin-bottom:8px}
 .import-card .import-title{font-size:15px;font-weight:600}
 .import-card .import-desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.5}
@@ -369,7 +369,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .import-help h4{font-size:14px;color:var(--text);margin-bottom:8px}
 .import-help code{background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:12px}
 .file-upload-area{margin:0 20px 14px;padding:24px;border:2px dashed var(--border);border-radius:var(--radius);text-align:center;cursor:pointer;transition:all 0.2s;background:var(--card)}
-.file-upload-area:active,.file-upload-area.dragover{border-color:var(--primary);background:#FEF2F2}
+.file-upload-area:active,.file-upload-area.dragover{border-color:var(--primary);background:var(--primary-bg)}
 .file-upload-area .upload-icon{font-size:32px;margin-bottom:8px}
 .file-upload-area .upload-text{font-size:14px;font-weight:600}
 .file-upload-area .upload-hint{font-size:12px;color:var(--text-secondary);margin-top:4px}
@@ -392,7 +392,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .modal-overlay.show .modal-sheet{transform:translateY(0)}
 .modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:20px}
 .modal-option{padding:16px;border-radius:var(--radius-sm);border:1.5px solid var(--border);margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all 0.2s}
-.modal-option:active{border-color:var(--primary);background:#FEF2F2}
+.modal-option:active{border-color:var(--primary);background:var(--primary-bg)}
 .modal-option .mo-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .modal-option .mo-info{flex:1}
 .modal-option .mo-title{font-size:15px;font-weight:600}
@@ -414,11 +414,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 /* ===== Dark Mode ===== */
 html.dark-mode{--bg:#0C1322;--card:#182234;--text:#E2E8F0;--text-secondary:#94A3B8;--border:#2C3A4E;--shadow:0 2px 8px rgba(0,0,0,0.35);--shadow-lg:0 8px 24px rgba(0,0,0,0.45);--card-bg:rgba(24,34,52,0.85);--card-opacity:0.85}
 html.dark-mode body{background:#0C1322}
-html.dark-mode .header{background:linear-gradient(135deg,#7F1D1D,#450A0A)!important}
+html.dark-mode .header{background:linear-gradient(135deg,var(--primary-bg-deep),var(--primary-dark))!important}
 html.dark-mode .stat-card,html.dark-mode .menu-card,html.dark-mode .progress-card,html.dark-mode .question-card,html.dark-mode .wrong-item,html.dark-mode .result-card,html.dark-mode .practice-result-card{background:var(--card-bg);border-color:#2C3A4E}
 html.dark-mode .tab-bar{background:#182234;border-top-color:#2C3A4E}
 html.dark-mode .option-item{background:var(--card-bg);border-color:#2C3A4E}
-html.dark-mode .option-item.selected{border-color:var(--primary);background:rgba(59,28,28,var(--card-opacity))}
+html.dark-mode .option-item.selected{border-color:var(--primary);background:rgba(var(--sel-bg-dm-rgb),var(--card-opacity))}
 html.dark-mode .option-item.correct{border-color:#09B834;background:rgba(6,95,70,var(--card-opacity))}
 html.dark-mode .option-item.wrong{border-color:#E51B1B;background:rgba(127,29,29,var(--card-opacity))}
 html.dark-mode .option-item.show-correct{border-color:#09B834;background:rgba(6,95,70,var(--card-opacity))}
@@ -434,7 +434,7 @@ html.dark-mode .option-item.multi-sel .option-letter{background:#3B82F6;color:wh
 html.dark-mode .option-item.exam-sel{border-color:#3B82F6;background:rgba(30,58,95,var(--card-opacity))}
 html.dark-mode .option-item.exam-sel .option-letter{background:#3B82F6;color:white}
 html.dark-mode .judge-btn{background:var(--card-bg);border-color:#2C3A4E;color:#E2E8F0}
-html.dark-mode .judge-btn.selected{border-color:var(--primary);background:rgba(59,28,28,var(--card-opacity))}
+html.dark-mode .judge-btn.selected{border-color:var(--primary);background:rgba(var(--sel-bg-dm-rgb),var(--card-opacity))}
 html.dark-mode .judge-btn.correct{border-color:#09B834;background:rgba(6,95,70,var(--card-opacity))}
 html.dark-mode .judge-btn.wrong{border-color:#E51B1B;background:rgba(127,29,29,var(--card-opacity))}
 html.dark-mode .fill-input-row input,html.dark-mode .fill-inline-input{background:#182234;border-color:#2C3A4E;color:#E2E8F0}
@@ -468,7 +468,7 @@ html.dark-mode .empty-state{color:#94A3B8}
 html.dark-mode .custom-summary{background:linear-gradient(135deg,#451A03,#78350F)}
 html.dark-mode .custom-summary-title{color:#FDE68A}
 html.dark-mode .custom-summary-row{color:#FDE68A}
-html.dark-mode .exam-timer{background:#7F1D1D}
+html.dark-mode .exam-timer{background:var(--primary-bg-deep)}
 html.dark-mode .settings-toggle{background:#475569}
 html.dark-mode .settings-toggle.active{background:#22C55E}
 html.dark-mode .custom-toggle{background:#475569}
@@ -519,10 +519,32 @@ html.dark-mode .bg-clear-btn{background:#450A0A;color:#FCA5A5;border-color:#7F1D
 .edit-option-display.correct-option{border-color:var(--success);background:#ECFDF5}
 .edit-option-display .edit-opt-letter{width:28px;height:28px;border-radius:50%;background:#F1F5F9;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-secondary);margin-right:10px;flex-shrink:0}
 .edit-option-display.correct-option .edit-opt-letter{background:var(--success);color:white}
-html.dark-mode #edit-modal .edit-page-header{background:linear-gradient(135deg,#7F1D1D,#450A0A)}
+html.dark-mode #edit-modal .edit-page-header{background:linear-gradient(135deg,var(--primary-bg-deep),var(--primary-dark))}
 html.dark-mode .edit-option-display{background:#1e293b;border-color:#334155}
 html.dark-mode .edit-option-display.correct-option{background:#064E3B;border-color:#10B981}
 html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#94A3B8}
+
+/* ===== Blue Theme ===== */
+html.theme-blue{--primary:#1D4ED8;--primary-light:#3B82F6;--primary-dark:#1E3A8A;--primary-bg:#DBEAFE;--primary-bg-dark:#BFDBFE;--primary-bg-deep:#172554;--primary-bg-rgb:219,234,254;--sel-bg-rgb:219,234,254;--sel-bg-dm-rgb:23,37,84}
+html.theme-blue.dark-mode{--primary-bg-deep:#1E3A8A}
+
+/* ===== Black Theme ===== */
+html.theme-black{--primary:#374151;--primary-light:#6B7280;--primary-dark:#111827;--primary-bg:#F3F4F6;--primary-bg-dark:#E5E7EB;--primary-bg-deep:#1F2937;--primary-bg-rgb:243,244,246;--sel-bg-rgb:243,244,246;--sel-bg-dm-rgb:55,65,81}
+html.theme-black.dark-mode{--primary-bg-deep:#1F2937}
+
+/* Theme selector UI */
+.theme-selector{display:flex;gap:10px;margin-top:4px}
+.theme-option{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:var(--radius-sm);border:2.5px solid var(--border);background:var(--card);cursor:pointer;transition:all 0.2s}
+.theme-option:active{transform:scale(0.96)}
+.theme-option.active{border-color:var(--primary);box-shadow:0 0 0 2px rgba(var(--sel-bg-rgb),0.5)}
+.theme-option .theme-dot{width:36px;height:36px;border-radius:50%;border:2px solid rgba(0,0,0,0.08)}
+.theme-option .theme-label{font-size:12px;font-weight:600;color:var(--text-secondary)}
+.theme-option.active .theme-label{color:var(--primary)}
+.theme-dot-red{background:linear-gradient(135deg,#DC2626,#991B1B)}
+.theme-dot-blue{background:linear-gradient(135deg,#1D4ED8,#1E3A8A)}
+.theme-dot-black{background:linear-gradient(135deg,#374151,#111827)}
+html.dark-mode .theme-option{border-color:#2C3A4E;background:#182234}
+html.dark-mode .theme-option.active{border-color:var(--primary);box-shadow:0 0 0 2px rgba(var(--sel-bg-dm-rgb),0.5)}
 </style>
 </head>
 <body>
@@ -839,12 +861,30 @@ html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#9
 <div class="page" id="page-settings">
   <div class="header"><div class="header-title">设置</div><div class="header-sub">个性化你的学习体验</div></div>
   <div style="padding:20px">
+    <div class="settings-section-title">通用</div>
+
     <div class="menu-card" style="margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default">
       <div style="display:flex;align-items:center;gap:12px">
         <div class="icon" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin:0">🔀</div>
         <div><div class="title" style="font-size:15px;font-weight:600">打乱选项顺序</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">做选择题时随机打乱A/B/C/D选项顺序。<span style="color:var(--primary);font-weight:700;text-decoration:underline">注意：解析不会因为选项顺序被打乱而更改，所以更改答案或解析时记得关闭哦</span></div></div>
       </div>
       <div class="settings-toggle" id="shuffle-options-toggle" onclick="toggleShuffleOptions()"></div>
+    </div>
+
+    <div class="menu-card" style="margin-bottom:14px;padding:16px 18px;cursor:default">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="icon" style="background:linear-gradient(135deg,#FDE68A,#F59E0B);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin:0">📝</div>
+          <div><div class="title" style="font-size:15px;font-weight:600">错题本自动移出</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">开启后，连续答对指定次数后自动从错题本移出</div></div>
+        </div>
+        <div class="settings-toggle" id="wrong-auto-remove-toggle" onclick="toggleWrongAutoRemove()"></div>
+      </div>
+      <div id="wrong-threshold-row" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;color:var(--text-secondary)">连续答对 <strong id="wrong-threshold-display" style="color:var(--text);font-size:14px">3</strong> 次后自动移出</span>
+          <button onclick="showThresholdEditModal()" style="padding:5px 14px;border-radius:8px;border:1.5px solid var(--primary);background:rgba(220,38,38,0.06);color:var(--primary);font-size:12px;font-weight:600;cursor:pointer">编辑</button>
+        </div>
+      </div>
     </div>
 
     <div class="settings-section-title">外观</div>
@@ -855,6 +895,18 @@ html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#9
         <div><div class="title" style="font-size:15px;font-weight:600">夜间模式</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">开启后使用深色界面，适合夜间使用</div></div>
       </div>
       <div class="settings-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()"></div>
+    </div>
+
+    <div class="menu-card" style="margin-bottom:14px;padding:16px 18px;cursor:default">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="icon" style="background:linear-gradient(135deg,#FDE68A,#F59E0B);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin:0">🎨</div>
+        <div><div class="title" style="font-size:15px;font-weight:600">主题颜色</div><div class="desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">选择你喜欢的界面主题</div></div>
+      </div>
+      <div class="theme-selector" id="theme-selector">
+        <div class="theme-option" onclick="setTheme('red')" data-theme="red"><div class="theme-dot theme-dot-red"></div><div class="theme-label">经典红</div></div>
+        <div class="theme-option" onclick="setTheme('blue')" data-theme="blue"><div class="theme-dot theme-dot-blue"></div><div class="theme-label">深海蓝</div></div>
+        <div class="theme-option" onclick="setTheme('black')" data-theme="black"><div class="theme-dot theme-dot-black"></div><div class="theme-label">商务黑</div></div>
+      </div>
     </div>
 
     <div class="settings-section-title">刷题背景</div>
@@ -915,16 +967,6 @@ html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#9
   </div>
 </div>
 
-<!-- REWARD POPUP -->
-<div class="reward-popup" id="reward-popup" onclick="closeReward()">
-  <div class="reward-content" onclick="event.stopPropagation()">
-    <div class="reward-emoji" id="reward-emoji">🎉</div>
-    <div class="reward-text" id="reward-text">太棒了！</div>
-    <div class="reward-sub" id="reward-sub">继续加油</div>
-    <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="closeReward()">继续</button>
-  </div>
-</div>
-
 <!-- CONFIRM DIALOG -->
 <div class="confirm-dialog" id="confirm-dialog">
   <div class="confirm-box">
@@ -963,6 +1005,11 @@ html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#9
     <div class="import-title">导入新题库</div>
     <div class="import-desc">支持 JSON 和 TXT 格式文件</div>
   </div>
+  <div class="import-card" onclick="showMergeImportPage()" style="margin-top:8px">
+    <div class="import-icon">📎</div>
+    <div class="import-title">导入到当前题库</div>
+    <div class="import-desc">将题目合并到当前选中的题库</div>
+  </div>
   <div style="height:20px"></div>
 </div>
 
@@ -979,6 +1026,34 @@ html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#9
       <div class="mo-info"><div class="mo-title">分享为 TXT 文件</div><div class="mo-desc">纯文本格式，方便阅读编辑</div></div>
     </div>
     <button class="modal-cancel" onclick="closeShareModal()">关闭</button>
+  </div>
+</div>
+
+<!-- RENAME MODAL -->
+<div class="modal-overlay" id="rename-modal" onclick="if(event.target===this)closeRenameModal()">
+  <div class="modal-sheet">
+    <div class="modal-title">重命名题库</div>
+    <div style="padding:0 4px 20px">
+      <label style="display:block;font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">请输入重命名后的题库名称：</label>
+      <input type="text" class="bank-name-input" id="rename-bank-input" placeholder="请输入题库名称" autocomplete="off" style="width:100%;margin-bottom:0">
+    </div>
+    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="confirmRename()">确认</button>
+    <button class="modal-cancel" onclick="closeRenameModal()">取消</button>
+  </div>
+</div>
+
+<!-- THRESHOLD EDIT MODAL -->
+<div class="modal-overlay" id="threshold-modal" onclick="if(event.target===this)closeThresholdEditModal()">
+  <div class="modal-sheet">
+    <div class="modal-title">编辑自动移出次数</div>
+    <div style="padding:0 4px 20px">
+      <label style="display:block;font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">连续答对几次后自动从错题本移出（1~999 的整数）：</label>
+      <input type="number" id="wrong-threshold-input" min="1" max="999" value="3" class="bank-name-input" style="width:100%;margin-bottom:0" autocomplete="off">
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="modal-cancel" style="flex:1;margin-top:0" onclick="closeThresholdEditModal()">取消</button>
+      <button class="btn btn-primary" style="flex:1;margin-bottom:0" onclick="confirmWrongThreshold()">确认</button>
+    </div>
   </div>
 </div>
 
@@ -1048,6 +1123,48 @@ html.dark-mode .edit-option-display .edit-opt-letter{background:#334155;color:#9
     </div>
   </div>
   <div style="height:20px"></div>
+</div>
+
+<!-- MERGE IMPORT -->
+<div class="page" id="page-merge-import">
+  <div class="header"><button class="back-btn" onclick="goBack()">←</button><div class="header-title" style="padding-left:36px">导入到当前题库</div><div class="header-sub" id="merge-import-sub">将题目合并到当前选中的题库</div></div>
+  <div style="padding:16px 0">
+    <div style="display:flex;gap:10px;padding:0 20px 14px">
+      <div class="file-upload-area" style="flex:1;margin:0;padding:20px 10px" onclick="document.getElementById('merge-file-input').click()">
+        <div class="upload-icon">📄</div>
+        <div class="upload-text" id="merge-upload-text">点击选择文件</div>
+        <div class="upload-hint">支持 .json 和 .txt 文件</div>
+        <input type="file" id="merge-file-input" accept=".json,.txt" style="display:none" onchange="handleMergeFileSelect(this)">
+      </div>
+      <div class="file-upload-area" style="flex:1;margin:0;padding:20px 10px" onclick="showBankPickerForMerge()">
+        <div class="upload-icon">📚</div>
+        <div class="upload-text" id="merge-bank-text">从已有题库添加</div>
+        <div class="upload-hint">选择其他题库合并</div>
+      </div>
+    </div>
+    <div style="padding:0 20px 8px">
+      <button class="btn btn-primary" style="width:100%" id="merge-import-confirm-btn" onclick="confirmMergeImport()" disabled>追加到当前题库</button>
+    </div>
+    <div class="import-help">
+      <h4>文件格式说明</h4>
+      <div style="margin-bottom:8px"><strong>JSON 格式：</strong>包含题目数组的 JSON 文件，每道题包含 <code>type</code>（single/multi/judge/fill）、<code>question</code>、<code>options</code>（选择题）、<code>answer</code> 字段，可选 <code>explanation</code>（解析）。</div>
+      <div><strong>TXT 格式：</strong>纯文本文件，每题用 <code>---</code> 分隔，需标注题型和答案。</div>
+      <div style="margin-top:10px;padding:10px;background:#FEF2F2;border-radius:8px;font-size:12px;color:var(--text)">💡 <strong>提示：</strong>你可以借助 AI 工具将任意资料转换为以上格式。在"选择题库"页面底部可查看详细的 AI 格式化提示词。</div>
+    </div>
+    <div style="padding:12px 20px">
+      <button class="btn btn-outline" style="width:100%;font-size:13px" onclick="showImportHelp()">📋 查看 AI 格式化提示词</button>
+    </div>
+  </div>
+  <div style="height:20px"></div>
+</div>
+
+<!-- BANK PICKER MODAL FOR MERGE -->
+<div class="modal-overlay" id="bank-picker-modal" onclick="if(event.target===this)closeBankPickerModal()">
+  <div class="modal-sheet" style="max-height:70vh;display:flex;flex-direction:column">
+    <div class="modal-title">选择要合并的题库</div>
+    <div id="bank-picker-list" style="flex:1;overflow-y:auto;padding:0 4px 16px"></div>
+    <button class="modal-cancel" onclick="closeBankPickerModal()">关闭</button>
+  </div>
 </div>
 
 <!-- IMPORT HELP (AI Prompt) -->
@@ -1250,7 +1367,7 @@ function renderBankList() {
     var itemHtml = '<div class="bank-item'+(isActive?' active':'')+'" onclick="'+(_bankManageMode ? 'toggleBankCheck(\''+b.id+'\')' : 'selectBank(\''+b.id+'\')')+'">' +
       '<div class="bank-info"><div class="bank-title">'+b.name+(b.builtIn?'<span class="built-in-tag">内置</span>':'')+'</div>' +
       '<div class="bank-desc">'+desc+'</div></div>' +
-      (_bankManageMode ? '' : '<button class="bank-del-btn" style="background:rgba(16,185,129,0.08);color:#10B981" onclick="event.stopPropagation();showShareModal(\''+b.id+'\')">↗</button>') +
+      (_bankManageMode ? '' : '<button class="bank-del-btn" style="background:rgba(59,130,246,0.08);color:#3B82F6" onclick="event.stopPropagation();renameBank(\''+b.id+'\')">✏️</button><button class="bank-del-btn" style="background:rgba(16,185,129,0.08);color:#10B981" onclick="event.stopPropagation();showShareModal(\''+b.id+'\')">↗</button>') +
       '</div>';
 
     if (_bankManageMode) {
@@ -1264,6 +1381,38 @@ function renderBankList() {
 function selectBank(bankId) {
   switchBank(bankId);
   renderBankList();
+}
+
+var _renameBankId = null;
+
+function renameBank(bankId) {
+  var banks = getBanks();
+  var bank = banks.find(function(b){return b.id===bankId});
+  if (!bank) return;
+  _renameBankId = bankId;
+  var input = document.getElementById('rename-bank-input');
+  if (input) { input.value = bank.name; input.focus(); }
+  document.getElementById('rename-modal').classList.add('show');
+}
+
+function closeRenameModal() {
+  document.getElementById('rename-modal').classList.remove('show');
+  _renameBankId = null;
+}
+
+function confirmRename() {
+  var input = document.getElementById('rename-bank-input');
+  var newName = input ? input.value.trim() : '';
+  if (!newName) { showReward('⚠️', '名称不能为空', '请输入题库名称'); return; }
+  var banks = getBanks();
+  var bank = banks.find(function(b){return b.id===_renameBankId});
+  if (!bank) { closeRenameModal(); return; }
+  bank.name = newName;
+  saveBanks(banks);
+  renderBankList();
+  updateBankButton();
+  closeRenameModal();
+  showReward('✅', '重命名成功', '题库已更名为「' + bank.name + '」');
 }
 
 // ============ BANK MANAGE MODE ============
@@ -2209,6 +2358,178 @@ function confirmImport() {
   }, 1200);
 }
 
+var _pendingMergeData = null;
+
+function showMergeImportPage() {
+  var bank = getActiveBank();
+  if (!bank) { showReward('⚠️', '未选择题库', '请先选择一个题库'); return; }
+  if (bank.builtIn) { showReward('⚠️', '内置题库不可追加', '请新建或选择一个自定义题库后再导入'); return; }
+  _pendingMergeData = null;
+  var sub = document.getElementById('merge-import-sub');
+  if (sub) sub.textContent = '将题目合并到「' + bank.name + '」';
+  var uploadText = document.getElementById('merge-upload-text');
+  if (uploadText) uploadText.textContent = '点击选择文件';
+  var bankText = document.getElementById('merge-bank-text');
+  if (bankText) bankText.textContent = '从已有题库添加';
+  var confirmBtn = document.getElementById('merge-import-confirm-btn');
+  if (confirmBtn) confirmBtn.disabled = true;
+  var fi = document.getElementById('merge-file-input');
+  if (fi) fi.value = '';
+  _pageParents['page-merge-import'] = 'page-bank-select';
+  showPage('page-merge-import');
+}
+
+function handleMergeFileSelect(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var ext = file.name.split('.').pop().toLowerCase();
+  if (ext !== 'json' && ext !== 'txt') {
+    showReward('⚠️', '格式不支持', '请上传 .json 或 .txt 文件');
+    input.value = '';
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var content = e.target.result;
+    try {
+      var newQuestions;
+      if (ext === 'json') {
+        newQuestions = parseJSONImport(content);
+      } else {
+        newQuestions = parseTXTImport(content);
+      }
+      if (!newQuestions || newQuestions.length === 0) {
+        showReward('⚠️', '解析失败', '文件中未找到有效题目');
+        return;
+      }
+      _pendingMergeData = newQuestions;
+      var uploadText = document.getElementById('merge-upload-text');
+      if (uploadText) uploadText.textContent = '✅ 已解析 ' + newQuestions.length + ' 道题';
+      var bankText = document.getElementById('merge-bank-text');
+      if (bankText) bankText.textContent = '从已有题库添加';
+      var confirmBtn = document.getElementById('merge-import-confirm-btn');
+      if (confirmBtn) confirmBtn.disabled = false;
+    } catch(err) {
+      showReward('⚠️', '解析出错', err.message || '文件格式不正确');
+    }
+  };
+  reader.readAsText(file, 'utf-8');
+  input.value = '';
+}
+
+function confirmMergeImport() {
+  if (!_pendingMergeData || !_pendingMergeData.length) {
+    showReward('⚠️', '请先选择题目来源', '可通过文件或已有题库添加');
+    return;
+  }
+  mergeIntoCurrentBank(_pendingMergeData);
+  _pendingMergeData = null;
+}
+
+function showBankPickerForMerge() {
+  var banks = getBanks();
+  var list = document.getElementById('bank-picker-list');
+  var otherBanks = banks.filter(function(b){ return b.id !== _currentBankId; });
+  if (!otherBanks.length) {
+    showReward('⚠️', '无可合并的题库', '当前没有其他题库可供选择');
+    return;
+  }
+  list.innerHTML = otherBanks.map(function(b){
+    var desc = b.questionCount + '道题';
+    return '<div class="modal-option" onclick="pickBankForMerge(\''+b.id+'\')" style="padding:14px;margin-bottom:8px">' +
+      '<div class="mo-info"><div class="mo-title">'+b.name+(b.builtIn?' <span style="font-size:11px;color:var(--text-secondary);font-weight:400">内置</span>':'')+'</div>' +
+      '<div class="mo-desc" style="font-size:12px;color:var(--text-secondary);margin-top:2px">'+desc+'</div></div></div>';
+  }).join('');
+  document.getElementById('bank-picker-modal').classList.add('show');
+}
+
+function closeBankPickerModal() {
+  document.getElementById('bank-picker-modal').classList.remove('show');
+}
+
+function pickBankForMerge(bankId) {
+  var banks = getBanks();
+  var bank = banks.find(function(b){return b.id===bankId});
+  if (!bank) { closeBankPickerModal(); return; }
+  var questions = [];
+  if (bank.id === 'builtin') {
+    // Load builtin questions
+    try {
+      var patches = JSON.parse(localStorage.getItem('quizBuiltinPatches') || '{}');
+      questions = BUILTIN_QUESTIONS.map(function(q){
+        var c = Object.assign({}, q);
+        return c;
+      });
+      Object.keys(patches).forEach(function(idx){
+        var i = parseInt(idx);
+        if (questions[i] && patches[idx]) {
+          if (patches[idx].answer !== undefined) questions[i].answer = patches[idx].answer;
+          if (patches[idx].explanation !== undefined) questions[i].explanation = patches[idx].explanation;
+        }
+      });
+    } catch(e) {
+      questions = BUILTIN_QUESTIONS.map(function(q){ return Object.assign({}, q); });
+    }
+  } else if (bank.questions) {
+    questions = bank.questions.map(function(q){ return Object.assign({}, q); });
+  }
+  if (!questions.length) {
+    showReward('⚠️', '题库为空', '「'+bank.name+'」中没有题目');
+    closeBankPickerModal();
+    return;
+  }
+  // Append to pending merge data
+  if (!_pendingMergeData) _pendingMergeData = [];
+  _pendingMergeData = _pendingMergeData.concat(questions);
+  // Update UI
+  var uploadText = document.getElementById('merge-upload-text');
+  if (uploadText) uploadText.textContent = '点击选择文件';
+  var bankText = document.getElementById('merge-bank-text');
+  if (bankText) bankText.textContent = '已添加 ' + _pendingMergeData.length + ' 题';
+  var confirmBtn = document.getElementById('merge-import-confirm-btn');
+  if (confirmBtn) confirmBtn.disabled = false;
+  closeBankPickerModal();
+  showReward('✅', '已添加', '从「' + bank.name + '」添加了 ' + questions.length + ' 道题');
+}
+
+function mergeIntoCurrentBank(newQuestions) {
+  var banks = getBanks();
+  var bank = banks.find(function(b){return b.id===_currentBankId});
+  if (!bank || !bank.questions) {
+    showReward('⚠️', '无法导入', '内置题库不支持追加题目，请新建题库后导入');
+    return;
+  }
+  // Calculate current max typeNum per type
+  var maxTypeNum = {single:0, multi:0, judge:0, fill:0, subjective:0};
+  bank.questions.forEach(function(q){
+    if (q.type && q.typeNum && q.typeNum > (maxTypeNum[q.type]||0)) {
+      maxTypeNum[q.type] = q.typeNum;
+    }
+  });
+  // Assign new typeNums and append
+  var typeCounters = {single:0, multi:0, judge:0, fill:0, subjective:0};
+  newQuestions.forEach(function(q){
+    typeCounters[q.type] = (typeCounters[q.type]||0) + 1;
+    q.typeNum = (maxTypeNum[q.type]||0) + typeCounters[q.type];
+    if (!q.explanation) q.explanation = '';
+    bank.questions.push(q);
+  });
+  // Update metadata
+  bank.questionCount = bank.questions.length;
+  bank.typeCounts = {
+    single: bank.questions.filter(function(q){return q.type==='single'}).length,
+    multi: bank.questions.filter(function(q){return q.type==='multi'}).length,
+    judge: bank.questions.filter(function(q){return q.type==='judge'}).length,
+    fill: bank.questions.filter(function(q){return q.type==='fill'}).length,
+    subjective: bank.questions.filter(function(q){return q.type==='subjective'}).length
+  };
+  saveBanks(banks);
+  // Reload bank questions to pick up changes
+  loadBankQuestions(_currentBankId);
+  showReward('✅', '合并成功', '已向「' + bank.name + '」追加 ' + newQuestions.length + ' 道题，当前共 ' + bank.questionCount + ' 题');
+  renderBankList();
+}
+
 // ============ IMPORT HELP (AI PROMPTS) ============
 var PROMPT_JSON = '你是一个题库格式化助手。请帮我将以下资料转换为标准 JSON 格式的题库文件。\n\n【输出格式要求】\n输出一个 JSON 对象，包含 "questions" 数组。每道题的格式如下：\n\n{\n  "type": "single",  // 题型：single（单选）、multi（多选）、judge（判断）、fill（填空）、subjective（主观题/简答题）\n  "question": "题目内容",\n  "options": ["选项A", "选项B", "选项C", "选项D"],  // 判断题、填空题和主观题不需要此字段\n  "answer": "B",  // 单选填正确选项字母（A/B/C/D）；多选填所有正确选项字母（如"AB"、"ACD"）；判断填 true 或 false；填空如果是单空填字符串"答案"，多空填数组["答案1","答案2"]，题目中空白用 ___1___、___2___ 标记；主观题填参考答案文本，如果没有答案则填"无"\n  "explanation": "答案解析内容（可选字段，如有解析请添加）"\n}\n\n【具体要求】\n1. 单选题（type: "single"）：有4个选项，只有1个正确答案\n2. 多选题（type: "multi"）：有4个选项，有2个或以上正确答案\n3. 判断题（type: "judge"）：不需要 options 字段，answer 填 true（正确）或 false（错误）\n4. 填空题（type: "fill"）：不需要 options 字段，题目中用 ___1___、___2___、___3___ 标记空白位置；answer 字段：单空直接用字符串（如"坚持以人民为中心"），多空用数组（如["高质量发展","共同富裕"]）。【重要】原始资料中填空题的空白可能以多种形式出现，包括但不限于：连续下划线（______、___、__、_）、括号（ ）、空格、横线等，请务必仔细识别所有可能的空白标记，统一转换为 ___1___、___2___、___3___ 格式，并根据答案数量正确判断空的数量\n5. 主观题（type: "subjective"）：简答题、论述题等没有标准选项的题目。不需要 options 字段。answer 字段填参考答案文本；如果原始资料中没有提供答案，则填"无"\n6. explanation 为可选字段，如果原始资料中包含答案解析，请提取并填入；没有解析则不需要此字段\n7. 请确保所有题目都被转换，不要遗漏\n8. 请直接输出 JSON，不要添加 markdown 代码块标记\n9. 确保 JSON 格式正确，可以被直接解析\n10. 请综合题目特征准确判断题型：提供了选项（A/B/C/D）的归为选择题（single/multi）；要求判断陈述对错的归为判断题（judge）；没有选项且题目中包含需要填写的空白的，归为填空题（fill）；没有选项、没有空白、需要文字作答的简答题或论述题，归为主观题（subjective）';
 
@@ -2395,19 +2716,25 @@ function saveData(d){try{localStorage.setItem(getDataKey(_currentBankId),JSON.st
 
 function getWrongList(type){
   const d=loadData();
+  const th=getWrongThreshold();
+  const auto=getWrongAutoRemove();
   return Object.keys(d.wrongMap).map(Number).filter(oi => {
-    if(d.wrongMap[oi]>=3) return false;
+    if(auto && d.wrongMap[oi]>=th) return false;
     if(type && QUESTIONS[oi].type!==type) return false;
     return true;
   });
 }
 function getWrongCount(){
   const d=loadData();
-  return Object.keys(d.wrongMap).filter(oi=>d.wrongMap[oi]<3).length;
+  const th=getWrongThreshold();
+  const auto=getWrongAutoRemove();
+  return Object.keys(d.wrongMap).filter(oi=>!auto||d.wrongMap[oi]<th).length;
 }
 function getWrongCountByType(type){
   const d=loadData();
-  return Object.keys(d.wrongMap).filter(oi=>d.wrongMap[oi]<3 && QUESTIONS[oi].type===type).length;
+  const th=getWrongThreshold();
+  const auto=getWrongAutoRemove();
+  return Object.keys(d.wrongMap).filter(oi=>(!auto||d.wrongMap[oi]<th) && QUESTIONS[oi].type===type).length;
 }
 
 // ============ FAVORITES ============
@@ -2547,7 +2874,7 @@ document.addEventListener('click',function(e){
 });
 
 // ============ INIT ============
-function init(){initBanks();applyDarkMode();applyPracticeBackground();applyUiTransparency();_currentPageId='page-home';updateHome();renderBadges();updateBankButton()}
+function init(){initBanks();applyTheme();applyDarkMode();applyPracticeBackground();applyUiTransparency();_currentPageId='page-home';updateHome();renderBadges();updateBankButton()}
 
 function updateHome(){
   const d=loadData();
@@ -2628,18 +2955,108 @@ function toggleShuffleOptions(){
   setShuffleOptions(!cur);
   updateSettingsUI();
 }
+function getWrongAutoRemove(){
+  try{var v=localStorage.getItem('wrongAutoRemove');return v===null?true:v==='true'}catch(e){return true}
+}
+function setWrongAutoRemove(val){
+  try{localStorage.setItem('wrongAutoRemove',val?'true':'false')}catch(e){}
+}
+function toggleWrongAutoRemove(){
+  var cur=getWrongAutoRemove();
+  setWrongAutoRemove(!cur);
+  updateSettingsUI();
+  updateWrongSub();
+}
+function getWrongThreshold(){
+  try{var v=localStorage.getItem('wrongThreshold');if(v===null)return 3;var n=parseInt(v);return(isNaN(n)||n<1)?3:(n>999?999:n)}catch(e){return 3}
+}
+function setWrongThreshold(val){
+  try{localStorage.setItem('wrongThreshold',String(val))}catch(e){}
+}
+function showThresholdEditModal(){
+  var input=document.getElementById('wrong-threshold-input');
+  if(input) input.value=getWrongThreshold();
+  document.getElementById('threshold-modal').classList.add('show');
+}
+function closeThresholdEditModal(){
+  document.getElementById('threshold-modal').classList.remove('show');
+}
+function confirmWrongThreshold(){
+  var input=document.getElementById('wrong-threshold-input');
+  if(!input)return;
+  var val=input.value.trim();
+  var n=parseInt(val);
+  if(val===''||isNaN(n)||n<1||n>999||String(n)!==val){
+    showReward('⚠️', '输入无效', '请输入 1~999 之间的整数');
+    input.value=getWrongThreshold();
+    return;
+  }
+  setWrongThreshold(n);
+  // Cap existing wrongMap entries at new threshold
+  var banks=getBanks();
+  banks.forEach(function(bank){
+    try{
+      var key=getDataKey(bank.id);
+      var raw=localStorage.getItem(key);
+      if(!raw)return;
+      var d=JSON.parse(raw);
+      if(!d.wrongMap)return;
+      var changed=false;
+      Object.keys(d.wrongMap).forEach(function(oi){
+        if(d.wrongMap[oi]>n){d.wrongMap[oi]=n;changed=true}
+      });
+      if(changed)localStorage.setItem(key,JSON.stringify(d));
+    }catch(e){}
+  });
+  updateWrongSub();
+  updateThresholdDisplay();
+  closeThresholdEditModal();
+  showReward('✅', '已更新', '连续答对 ' + n + ' 次后自动移出');
+}
+function updateThresholdDisplay(){
+  var el=document.getElementById('wrong-threshold-display');
+  if(el) el.textContent=getWrongThreshold();
+}
+function updateWrongSub(){
+  var sub=document.getElementById('wrong-sub');
+  if(!sub)return;
+  if(getWrongAutoRemove()){
+    sub.textContent='做对'+getWrongThreshold()+'遍后自动移出';
+  }else{
+    sub.textContent='自动移出已关闭';
+  }
+}
 function updateSettingsUI(){
   var el=document.getElementById('shuffle-options-toggle');
   if(el){
     if(getShuffleOptions()) el.classList.add('active');
     else el.classList.remove('active');
   }
+  // Wrong auto-remove toggle
+  var warEl=document.getElementById('wrong-auto-remove-toggle');
+  if(warEl){
+    if(getWrongAutoRemove()) warEl.classList.add('active');
+    else warEl.classList.remove('active');
+  }
+  var warRow=document.getElementById('wrong-threshold-row');
+  if(warRow){
+    warRow.style.display=getWrongAutoRemove()?'block':'none';
+  }
+  updateThresholdDisplay();
+  updateWrongSub();
   // Dark mode toggle
   var dm=document.getElementById('dark-mode-toggle');
   if(dm){
     if(getDarkMode()) dm.classList.add('active');
     else dm.classList.remove('active');
   }
+  // Theme selector
+  var curTheme=getTheme();
+  var themeOpts=document.querySelectorAll('#theme-selector .theme-option');
+  themeOpts.forEach(function(opt){
+    if(opt.getAttribute('data-theme')===curTheme) opt.classList.add('active');
+    else opt.classList.remove('active');
+  });
   // Practice background
   updateBgSettingsUI();
 }
@@ -2661,6 +3078,29 @@ function applyDarkMode(){
   if(getDarkMode()) document.documentElement.classList.add('dark-mode');
   else document.documentElement.classList.remove('dark-mode');
   applyUiTransparency();
+}
+
+// ============ THEME ============
+function getTheme(){
+  try{return localStorage.getItem('quizApp_theme')||'red'}catch(e){return 'red'}
+}
+function setTheme(name){
+  if(name!=='red'&&name!=='blue'&&name!=='black') name='red';
+  try{localStorage.setItem('quizApp_theme',name)}catch(e){}
+  applyTheme();
+  updateSettingsUI();
+}
+function applyTheme(){
+  var t=getTheme();
+  document.documentElement.classList.remove('theme-blue','theme-black');
+  if(t==='blue') document.documentElement.classList.add('theme-blue');
+  else if(t==='black') document.documentElement.classList.add('theme-black');
+  var mc=document.querySelector('meta[name="theme-color"]');
+  if(mc){
+    if(t==='blue') mc.setAttribute('content','#1D4ED8');
+    else if(t==='black') mc.setAttribute('content','#374151');
+    else mc.setAttribute('content','#DC2626');
+  }
 }
 
 // ============ PRACTICE BACKGROUND ============
@@ -2823,6 +3263,7 @@ function showWrongPage(){
   _wrongSelected=[];
   document.getElementById('wrong-manage-btn').textContent='管理';
   document.getElementById('wrong-batch-bar').style.display='none';
+  updateWrongSub();
   renderWrongFilter('all');
   showPage('page-wrong');
 }
@@ -2843,7 +3284,7 @@ function renderWrongFilter(activeType){
   const d=loadData();
   container.innerHTML=list.map(oi=>{
     const q=QUESTIONS[oi];
-    const remain=3-(d.wrongMap[oi]||0);
+    const remain=getWrongThreshold()-(d.wrongMap[oi]||0);
     const badgeCls=remain>=2?'need2':'need1';
     const isChecked=_wrongSelected.indexOf(oi)>=0;
     if(_wrongManageMode){
@@ -3491,9 +3932,9 @@ function onAnswered(){
     if(!d.correct.includes(oi))d.correct.push(oi);
     if(!d[tdk].includes(oi))d[tdk].push(oi);
     // Wrong book: increment correct count
-    if(d.wrongMap[oi]!==undefined){
+    if(getWrongAutoRemove() && d.wrongMap[oi]!==undefined){
       d.wrongMap[oi]=(d.wrongMap[oi]||0)+1;
-      if(d.wrongMap[oi]>=3) delete d.wrongMap[oi];
+      if(d.wrongMap[oi]>=getWrongThreshold()) delete d.wrongMap[oi];
     }
     p.streak++;
   } else {
@@ -4538,7 +4979,7 @@ function doFinishExam(){
       } else {
         if(!d.correct.includes(oi)) d.correct.push(oi);
         if(!d.done.includes(oi)) d.done.push(oi);
-        if(d.wrongMap[oi]!==undefined){d.wrongMap[oi]++;if(d.wrongMap[oi]>=3)delete d.wrongMap[oi]}
+        if(d.wrongMap[oi]!==undefined){if(getWrongAutoRemove()){d.wrongMap[oi]++;if(d.wrongMap[oi]>=getWrongThreshold())delete d.wrongMap[oi]}}
       }
     });
     saveData(d);
@@ -4723,5 +5164,16 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random
 
 init();
 </script>
+
+<!-- REWARD POPUP (outside .app for maximum z-index) -->
+<div class="reward-popup" id="reward-popup" onclick="closeReward()">
+  <div class="reward-content" onclick="event.stopPropagation()">
+    <div class="reward-emoji" id="reward-emoji">🎉</div>
+    <div class="reward-text" id="reward-text">太棒了！</div>
+    <div class="reward-sub" id="reward-sub">继续加油</div>
+    <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="closeReward()">继续</button>
+  </div>
+</div>
+
 </body>
 </html>
